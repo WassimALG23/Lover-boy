@@ -21,12 +21,12 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
       audio.loop = true;
       audio.preload = "auto";
       audioRef.current = audio;
-      
+
       audio.addEventListener('error', (e) => {
         console.error("Error loading audio:", e);
         setIsPlaying(false);
       });
-      
+
       setIsPlaying(false);
     }
 
@@ -121,9 +121,9 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
               <div className="text-xl text-center mb-4">
                 <StylizedText
                   text={`"${artist.lyric}"`}
-                  highlighted={artist.songName}
+                  highlighted={artist.highlighted}
+                  highlightColor={artist.highlightColor}
                   className="text-white/90"
-                  highlightColor={artist.quoteColor}
                 />
               </div>
             </div>
