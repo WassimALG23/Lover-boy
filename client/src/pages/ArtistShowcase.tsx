@@ -81,13 +81,13 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
               </div>
 
               {/* Artist Name */}
-              <h2 className="text-2xl font-bold text-white font-stylized">
+              <h2 className="text-2xl font-bold gradient-text outlined-text font-stylized">
                 {artist.name}
               </h2>
 
               {/* Song Name and Play Button */}
               <div className="flex items-center gap-4">
-                <span className="bg-gradient-to-r from-blue-400 to-pink-400 text-transparent bg-clip-text text-xl">
+                <span className="gradient-text outlined-text text-xl">
                   {artist.songName}
                 </span>
                 <Button

@@ -79,3 +79,8 @@
     filter: hue-rotate(360deg);
   }
 }
+
+.outlined-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+  text-stroke: 1px rgba(255, 255, 255, 0.5);
+}
