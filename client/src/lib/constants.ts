@@ -4,6 +4,7 @@ export interface Artist {
   lyric: string;
   songName: string;
   image: string;
+  audioUrl: string;
   quoteColor: string;
 }
 
@@ -14,6 +15,7 @@ export const ARTISTS: Artist[] = [
     lyric: "just to let u know Ur my kind of women",
     songName: "My Kind of Woman",
     image: "/artists/mac-demarco.jpg",
+    audioUrl: "/attached_assets/Mac DeMarco  My Kind Of Woman.mp3",
     quoteColor: "text-emerald-400"
   },
   {
@@ -22,6 +24,7 @@ export const ARTISTS: Artist[] = [
     lyric: "i know that we're not allowed to but i want you",
     songName: "Not Allowed",
     image: "/attached_assets/Screenshot_2025-02-12-12-43-54-811_com.spotify.music.png",
+    audioUrl: "/attached_assets/Not Allowed.mp3",
     quoteColor: "text-rose-400"
   },
   {
@@ -30,6 +33,7 @@ export const ARTISTS: Artist[] = [
     lyric: "i just want you",
     songName: "I Want You",
     image: "/artists/mitski.jpg",
+    audioUrl: "/attached_assets/Mitski - I Want You (Official Video).mp3",
     quoteColor: "text-blue-400"
   },
   {
@@ -38,6 +42,7 @@ export const ARTISTS: Artist[] = [
     lyric: "i will treat u better im not like him",
     songName: "Like Him",
     image: "/artists/tyler.jpg",
+    audioUrl: "/attached_assets/Tyler, The Creator - Like Him (feat. LolaYoung) Lyrics @TylerTheCreator.mp3",
     quoteColor: "text-cyan-400"
   },
   {
@@ -46,6 +51,7 @@ export const ARTISTS: Artist[] = [
     lyric: "i just want to be anything with u",
     songName: "Anything",
     image: "/artists/adrianne-lenker.jpg",
+    audioUrl: "/attached_assets/adrianne lenker - anything (official audio).mp3",
     quoteColor: "text-orange-400"
   },
   {
@@ -54,6 +60,7 @@ export const ARTISTS: Artist[] = [
     lyric: "i wanna be yours",
     songName: "I Wanna Be Yours",
     image: "/artists/arctic-monkeys.jpg",
+    audioUrl: "/attached_assets/Arctic Monkeys - I Wanna Be Yours.mp3",
     quoteColor: "text-purple-400"
   }
 ];

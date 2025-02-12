@@ -1,4 +1,3 @@
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -29,7 +28,7 @@
 }
 
 .space-background {
-  background: black url('/milky-way.webp') center/cover fixed no-repeat;
+  background: black url('/attached_assets/milky-way.webp') center/cover fixed no-repeat;
   position: relative;
   overflow: hidden;
 }
@@ -68,7 +67,7 @@
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 outlined-text;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400;
   animation: hue-rotate 10s infinite linear;
 }
 
@@ -79,9 +78,4 @@
   to {
     filter: hue-rotate(360deg);
   }
-}
-
-.outlined-text {
-  -webkit-text-stroke: 2px currentColor;
-  text-stroke: 2px currentColor;
 }
