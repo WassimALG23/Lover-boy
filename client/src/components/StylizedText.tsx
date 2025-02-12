@@ -14,29 +14,40 @@ export default function StylizedText({
   className = "",
   highlightColor = "text-pink-500"
 }: StylizedTextProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [displayText, setDisplayText] = useState('');
+  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
-  }, []);
+    setDisplayText('');
+    setIsComplete(false);
+    let currentIndex = 0;
+    
+    const interval = setInterval(() => {
+      if (currentIndex < text.length) {
+        setDisplayText(prev => prev + text[currentIndex]);
+        currentIndex++;
+      } else {
+        setIsComplete(true);
+        clearInterval(interval);
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [text]);
 
   if (!highlighted) {
     return (
-      <span 
-        className={`font-stylized ${className} transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-      >
-        {text}
+      <span className={`font-stylized ${className} ${isComplete ? 'opacity-100' : 'opacity-80'}`}>
+        {displayText}
       </span>
     );
   }
 
-  const parts = text.split(highlighted);
+  const parts = displayText.split(highlighted);
   const highlightedText = highlighted?.replace(/"/g, '') || '';
 
   return (
-    <span 
-      className={`font-stylized ${className} transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-    >
+    <span className={`font-stylized ${className} ${isComplete ? 'opacity-100' : 'opacity-80'}`}>
       {parts.map((part, index) => (
         <span key={index}>
           {part}
