@@ -17,37 +17,61 @@
   }
 
   body {
-    @apply bg-black text-foreground antialiased;
+    @apply bg-pink-50 text-foreground antialiased;
     margin: 0;
     padding: 0;
   }
 }
 
-/* Enhanced Space Background */
 .space-background {
-  background: black url('/milky-way.webp') center/cover fixed no-repeat;
+  background: #fdf2f8 url('/milky-way.webp') center/cover fixed no-repeat;
   position: relative;
   overflow: hidden;
+  background-image: url('/background.jpg');
+  background-size: 200px;
 }
 
-/* Improved Star Animation */
-.space-background::before {
+@keyframes dots {
+  0%, 20% { content: '.'; }
+  40%, 60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+
+.loading-text::after {
   content: '';
-  position: fixed;
-  width: 200%;
-  height: 200%;
-  top: -50%;
-  left: -50%;
-  z-index: 0;
-  pointer-events: none;
-  background-image: 
-    radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0)),
-    radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0)),
-    radial-gradient(1.5px 1.5px at 50px 160px, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0));
-  animation: space-animation 300s linear infinite;
+  animation: dots 1.5s infinite;
+  display: inline-block;
+  width: 1em;
+  text-align: left;
 }
 
-@keyframes space-animation {
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #fdf2f8;
+  font-family: sans-serif;
+}
+
+.loading-text {
+  color: #ec4899;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #fce7f3;
+  border-top: 3px solid #ec4899;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
@@ -57,13 +81,11 @@
   z-index: 1;
 }
 
-/* Clean Text Styling */
 .stylized-text {
   @apply text-white font-bold tracking-wide;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Page Transitions */
 .page-transition {
   animation: fadeScale 0.3s ease-out;
 }
@@ -79,7 +101,6 @@
   }
 }
 
-/* Interactive Elements */
 .interactive {
   @apply transition-transform duration-300;
 }

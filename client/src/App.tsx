@@ -37,7 +37,10 @@ export default function App() {
         });
 
         // Wait for all assets to load
-        await Promise.all([...imagePromises, ...audioPromises]);
+        await Promise.race([
+          Promise.all([...imagePromises, ...audioPromises]),
+          new Promise(resolve => setTimeout(resolve, 2000))
+        ]);
         setAssetsLoaded(true);
       } catch (error) {
         console.error("Error preloading assets:", error);
@@ -63,8 +66,9 @@ export default function App() {
   const renderPage = () => {
     if (!assetsLoaded) {
       return (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-white text-2xl">Loading assets...</div>
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <div className="loading-text">Loading assets</div>
         </div>
       );
     }
