@@ -4,7 +4,7 @@ export interface Artist {
   lyric: string;
   songName: string;
   image: string;
-  audioUrl: string;
+  spotifyId: string;  // Changed from audioUrl to spotifyId
   quoteColor: string;
 }
 
@@ -15,7 +15,7 @@ export const ARTISTS: Artist[] = [
     lyric: "just to let u know Ur my kind of women",
     songName: "My Kind of Women",
     image: "/artists/mac-demarco.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/3c3f0bfb4b3994490cf3f08cd8801018f9e84444",
+    spotifyId: "6XBxWrLgD1BN2RYJSBCpX5",
     quoteColor: "text-emerald-400"
   },
   {
@@ -23,8 +23,8 @@ export const ARTISTS: Artist[] = [
     route: "tv-girl", 
     lyric: "i know that we're not allowed to but i want you",
     songName: "Not Allowed",
-    image: "/attached_assets/Screenshot_2025-02-12-12-43-54-811_com.spotify.music.png",
-    audioUrl: "https://p.scdn.co/mp3-preview/6a46d469b67baa0fe945c0c41f1d45d368b8b57d",
+    image: "/artists/tv-girl.jpg",  // Using default image path
+    spotifyId: "2gxmC7jyZmGZtYsOfFtH2c",
     quoteColor: "text-rose-400"
   },
   {
@@ -33,7 +33,7 @@ export const ARTISTS: Artist[] = [
     lyric: "i just want you",
     songName: "I Want You",
     image: "/artists/mitski.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/1c5b2e823e0acf5d7b6aa7df1b7e5364a0837026",
+    spotifyId: "18c0mGE5iEMFXt9hF2g3A8",
     quoteColor: "text-blue-400"
   },
   {
@@ -42,7 +42,7 @@ export const ARTISTS: Artist[] = [
     lyric: "i will treat u better im not like him",
     songName: "Like Him",
     image: "/artists/tyler.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/ba04068706dcd1f025df83f9bf71c5abe4f98ada",
+    spotifyId: "7KA4W4McWYRpgf0fWsJZWB",
     quoteColor: "text-cyan-400"
   },
   {
@@ -51,7 +51,7 @@ export const ARTISTS: Artist[] = [
     lyric: "i just want to be anything with u",
     songName: "Anything",
     image: "/artists/adrianne-lenker.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/9c5cb4c974c87d9d88d87c0c6c3b20f76c87c5f1",
+    spotifyId: "5lF0pWPm3ZTTPVKVzFJkwR",
     quoteColor: "text-orange-400"
   },
   {
@@ -60,7 +60,7 @@ export const ARTISTS: Artist[] = [
     lyric: "i wanna be yours",
     songName: "I Wanna Be Yours",
     image: "/artists/arctic-monkeys.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/c12c4d92454bc8fdeea5d5a9a5b8da0995e6f26f",
+    spotifyId: "5XeFesFbtLpXzIVDNQP22n",
     quoteColor: "text-purple-400"
   }
 ];

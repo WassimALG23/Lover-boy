@@ -1,11 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { Howl } from "howler";
+import { useEffect, useState } from "react";
 import { ARTISTS } from "../lib/constants";
 import StylizedText from "../components/StylizedText";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Volume2, VolumeX } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { ArrowLeft } from "lucide-react";
 
 interface ArtistShowcaseProps {
   artistRoute: string;
@@ -14,57 +12,7 @@ interface ArtistShowcaseProps {
 
 export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcaseProps) {
   const artist = ARTISTS.find(a => a.route === artistRoute);
-  const soundRef = useRef<Howl | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const { toast } = useToast();
-
-  useEffect(() => {
-    // Clean up previous sound
-    if (soundRef.current) {
-      soundRef.current.stop();
-      soundRef.current.unload();
-    }
-
-    // Create new sound instance
-    if (artist) {
-      soundRef.current = new Howl({
-        src: [artist.audioUrl],
-        html5: true,
-        format: ['mp3'],
-        onplay: () => setIsPlaying(true),
-        onstop: () => setIsPlaying(false),
-        onend: () => setIsPlaying(false),
-        onloaderror: () => {
-          toast({
-            title: "Error",
-            description: "Failed to load audio. Please try again.",
-            variant: "destructive",
-          });
-        },
-      });
-
-      // Start playing
-      soundRef.current.play();
-    }
-
-    // Cleanup on unmount
-    return () => {
-      if (soundRef.current) {
-        soundRef.current.stop();
-        soundRef.current.unload();
-      }
-    };
-  }, [artist?.audioUrl, toast]);
-
-  const togglePlay = () => {
-    if (!soundRef.current) return;
-
-    if (soundRef.current.playing()) {
-      soundRef.current.pause();
-    } else {
-      soundRef.current.play();
-    }
-  };
+  const [showPlayer, setShowPlayer] = useState(false);
 
   if (!artist) {
     return <div>Artist not found</div>;
@@ -102,19 +50,32 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
               </h2>
 
               {/* Song Name and Play Button */}
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col items-center gap-4">
                 <span className="bg-gradient-to-r from-blue-400 to-pink-400 text-transparent bg-clip-text text-xl">
                   {artist.songName}
                 </span>
                 <Button
-                  variant="ghost"
-                  size="icon"
+                  variant="outline"
                   className="hover:bg-white/10"
-                  onClick={togglePlay}
+                  onClick={() => setShowPlayer(!showPlayer)}
                 >
-                  {isPlaying ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                  {showPlayer ? "Hide Player" : "Play on Spotify"}
                 </Button>
               </div>
+
+              {/* Spotify Player */}
+              {showPlayer && (
+                <div className="w-full max-w-md">
+                  <iframe
+                    src={`https://open.spotify.com/embed/track/${artist.spotifyId}`}
+                    width="100%"
+                    height="80"
+                    frameBorder="0"
+                    allow="encrypted-media"
+                    className="rounded-lg"
+                  />
+                </div>
+              )}
 
               {/* Lyrics */}
               <div className="text-xl text-center mb-4">
