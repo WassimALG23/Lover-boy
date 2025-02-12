@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 interface StylizedTextProps {
   text: string;
@@ -14,36 +14,29 @@ export default function StylizedText({
   className = "",
   highlightColor = "text-pink-500"
 }: StylizedTextProps) {
-  const [displayText, setDisplayText] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    let currentIndex = 0;
-    setDisplayText("");
-    setIsTyping(true);
-
-    const interval = setInterval(() => {
-      if (currentIndex < text.length) {
-        setDisplayText(prev => prev + text[currentIndex]);
-        currentIndex++;
-      } else {
-        setIsTyping(false);
-        clearInterval(interval);
-      }
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, [text]);
+    setIsVisible(true);
+  }, []);
 
   if (!highlighted) {
-    return <span className={`font-stylized ${className}`}>{displayText}</span>;
+    return (
+      <span 
+        className={`font-stylized ${className} transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      >
+        {text}
+      </span>
+    );
   }
 
-  const parts = displayText.split(highlighted);
-  const highlightedText = highlighted.replace(/"/g, '');
+  const parts = text.split(highlighted);
+  const highlightedText = highlighted?.replace(/"/g, '') || '';
 
   return (
-    <span className={`font-stylized text-lg ${className}`}>
+    <span 
+      className={`font-stylized ${className} transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+    >
       {parts.map((part, index) => (
         <span key={index}>
           {part}
@@ -54,7 +47,6 @@ export default function StylizedText({
           )}
         </span>
       ))}
-      {isTyping && <span className="animate-pulse">|</span>}
     </span>
   );
 }
