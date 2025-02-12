@@ -8,7 +8,7 @@ export const ARTISTS: Artist[] = [
     highlighted: "anything",
     highlightColor: "text-green-400",
     songName: "Anything",
-    image: "/artists/adrianne-lenker-watercolor.jpg",
+    image: "/artists/adrianne-lenker.jpg",
     audioUrl: "/audio/adrianne lenker - anything (official audio).mp3"
   },
   {
