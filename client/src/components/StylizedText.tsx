@@ -58,7 +58,11 @@ export default function StylizedText({
     <span className={`font-stylized ${className} ${isTyping ? 'opacity-80' : 'opacity-100'}`}>
       {segments.map((segment, index) => (
         segment.toLowerCase() === highlighted.toLowerCase() ? (
-          <span key={index} className={`font-bold ${highlightColor} transition-colors duration-300`}>
+          <span 
+            key={index} 
+            className={`font-bold ${highlightColor} animate-pulse`}
+            style={{ textShadow: '0 0 8px currentColor' }}
+          >
             {segment}
           </span>
         ) : (
