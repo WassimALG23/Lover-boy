@@ -39,6 +39,7 @@ export const submissions = pgTable("submissions", {
   artistName: text("artist_name").notNull(),
   songName: text("song_name").notNull(),
   quote: text("quote").notNull(),
+  imageFile: text("image_file").notNull(),
   status: text("status").notNull().default('pending'),
   createdAt: timestamp("created_at").defaultNow(),
 });

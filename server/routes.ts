@@ -3,9 +3,32 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import path from "path";
 import express from "express";
+import multer from "multer";
 import { insertArtistSchema, insertSongSchema, insertSubmissionSchema } from "@shared/schema";
 
 const ADMIN_PASSWORD = 'deadforever';
+
+// Configure multer for file uploads
+const imageStorage = multer.diskStorage({
+  destination: function (_req, _file, cb) {
+    cb(null, path.join(process.cwd(), "client", "public", "artists"));
+  },
+  filename: function (_req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
+
+const audioStorage = multer.diskStorage({
+  destination: function (_req, _file, cb) {
+    cb(null, path.join(process.cwd(), "client", "public", "audio"));
+  },
+  filename: function (_req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const uploadImage = multer({ storage: imageStorage });
+const uploadAudio = multer({ storage: audioStorage });
 
 // Middleware to check admin authentication
 const checkAdminAuth = (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -84,10 +107,19 @@ export function registerRoutes(app: Express): Server {
   });
 
   // Submission routes
-  app.post("/api/submissions", async (req, res) => {
+  app.post("/api/submissions", uploadImage.single('image'), async (req, res) => {
     try {
-      const submissionData = insertSubmissionSchema.parse(req.body);
-      const submission = await storage.createSubmission(submissionData);
+      if (!req.file) {
+        return res.status(400).json({ message: "Image file is required" });
+      }
+
+      const submissionData = {
+        ...req.body,
+        imageFile: `/artists/${req.file.filename}`,
+      };
+
+      const validatedData = insertSubmissionSchema.parse(submissionData);
+      const submission = await storage.createSubmission(validatedData);
       res.status(201).json(submission);
     } catch (error) {
       console.error("Error creating submission:", error);
@@ -106,7 +138,7 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  app.post("/api/admin/submissions/:id/:action", checkAdminAuth, async (req, res) => {
+  app.post("/api/admin/submissions/:id/:action", checkAdminAuth, uploadAudio.single('audio'), async (req, res) => {
     try {
       const { id, action } = req.params;
       if (action !== 'approve' && action !== 'reject') {
@@ -114,7 +146,30 @@ export function registerRoutes(app: Express): Server {
       }
 
       const status = action === 'approve' ? 'approved' : 'rejected';
+
+      // If approving, we need an audio file
+      if (status === 'approved' && !req.file) {
+        return res.status(400).json({ message: "Audio file is required for approval" });
+      }
+
       const submission = await storage.updateSubmissionStatus(parseInt(id), status);
+
+      // If approved, create the artist and song
+      if (status === 'approved' && submission) {
+        const artist = await storage.createArtist({
+          name: submission.artistName,
+          route: submission.artistName.toLowerCase().replace(/\s+/g, '-'),
+          image: submission.imageFile,
+        });
+
+        await storage.createSong({
+          name: submission.songName,
+          lyric: submission.quote,
+          audioUrl: `/audio/${req.file!.filename}`,
+          artistId: artist.id,
+        });
+      }
+
       res.json(submission);
     } catch (error) {
       console.error("Error updating submission:", error);

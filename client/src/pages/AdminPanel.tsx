@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -11,10 +11,13 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 export default function AdminPanel() {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [selectedSubmissionId, setSelectedSubmissionId] = useState<number | null>(null);
+  const audioFileRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -33,13 +36,24 @@ export default function AdminPanel() {
   });
 
   const handleAction = useMutation({
-    mutationFn: async ({ id, action }: { id: number; action: 'approve' | 'reject' }) => {
+    mutationFn: async ({ id, action, audioFile }: { id: number; action: 'approve' | 'reject'; audioFile?: File }) => {
+      if (action === 'approve' && !audioFile) {
+        throw new Error('Audio file is required for approval');
+      }
+
+      const formData = new FormData();
+      if (audioFile) {
+        formData.append('audio', audioFile);
+      }
+
       const response = await fetch(`/api/admin/submissions/${id}/${action}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${password}`
-        }
+        },
+        body: formData,
       });
+
       if (!response.ok) throw new Error(`Failed to ${action} submission`);
       return response.json();
     },
@@ -49,15 +63,33 @@ export default function AdminPanel() {
         title: "Success",
         description: "Submission updated successfully",
       });
+      setSelectedSubmissionId(null);
     },
-    onError: () => {
+    onError: (error: Error) => {
       toast({
         title: "Error",
-        description: "Failed to update submission",
+        description: error.message,
         variant: "destructive",
       });
     }
   });
+
+  const handleApprove = async (id: number) => {
+    if (!audioFileRef.current?.files?.[0]) {
+      toast({
+        title: "Error",
+        description: "Please select an audio file",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    await handleAction.mutate({
+      id,
+      action: 'approve',
+      audioFile: audioFileRef.current.files[0]
+    });
+  };
 
   const handleLogin = () => {
     if (password === 'deadforever') {
@@ -134,13 +166,35 @@ export default function AdminPanel() {
                   <TableCell className="space-x-2">
                     {submission.status === 'pending' && (
                       <>
-                        <Button
-                          onClick={() => handleAction.mutate({ id: submission.id, action: 'approve' })}
-                          size="sm"
-                          variant="default"
-                        >
-                          Approve
-                        </Button>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button
+                              size="sm"
+                              variant="default"
+                            >
+                              Approve
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent>
+                            <DialogHeader>
+                              <DialogTitle>Upload Audio File</DialogTitle>
+                            </DialogHeader>
+                            <div className="space-y-4">
+                              <Input
+                                ref={audioFileRef}
+                                type="file"
+                                accept="audio/*"
+                                className="bg-white/10 text-white"
+                              />
+                              <Button
+                                onClick={() => handleApprove(submission.id)}
+                                disabled={handleAction.isPending}
+                              >
+                                {handleAction.isPending ? "Processing..." : "Confirm Approval"}
+                              </Button>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
                         <Button
                           onClick={() => handleAction.mutate({ id: submission.id, action: 'reject' })}
                           size="sm"
