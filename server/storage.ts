@@ -1,4 +1,4 @@
-import { artists, songs, submissions, type Artist, type InsertArtist, type Song, type InsertSong, type Submission, type InsertSubmission } from "@shared/schema";
+import { artists, songs, type Artist, type InsertArtist, type Song, type InsertSong } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
@@ -13,12 +13,6 @@ export interface IStorage {
   getSong(id: number): Promise<Song | undefined>;
   getSongsByArtist(artistId: number): Promise<Song[]>;
   createSong(song: InsertSong): Promise<Song>;
-
-  // Submission operations
-  getSubmission(id: number): Promise<Submission | undefined>;
-  getAllSubmissions(): Promise<Submission[]>;
-  createSubmission(submission: InsertSubmission): Promise<Submission>;
-  updateSubmissionStatus(id: number, status: 'approved' | 'rejected'): Promise<Submission>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -88,50 +82,6 @@ export class DatabaseStorage implements IStorage {
       return newSong;
     } catch (error) {
       console.error('Error in createSong:', error);
-      throw error;
-    }
-  }
-
-  // Submission operations
-  async getSubmission(id: number): Promise<Submission | undefined> {
-    try {
-      const [submission] = await db.select().from(submissions).where(eq(submissions.id, id));
-      return submission;
-    } catch (error) {
-      console.error('Error in getSubmission:', error);
-      throw error;
-    }
-  }
-
-  async getAllSubmissions(): Promise<Submission[]> {
-    try {
-      return await db.select().from(submissions);
-    } catch (error) {
-      console.error('Error in getAllSubmissions:', error);
-      throw error;
-    }
-  }
-
-  async createSubmission(submission: InsertSubmission): Promise<Submission> {
-    try {
-      const [newSubmission] = await db.insert(submissions).values(submission).returning();
-      return newSubmission;
-    } catch (error) {
-      console.error('Error in createSubmission:', error);
-      throw error;
-    }
-  }
-
-  async updateSubmissionStatus(id: number, status: 'approved' | 'rejected'): Promise<Submission> {
-    try {
-      const [updatedSubmission] = await db
-        .update(submissions)
-        .set({ status })
-        .where(eq(submissions.id, id))
-        .returning();
-      return updatedSubmission;
-    } catch (error) {
-      console.error('Error in updateSubmissionStatus:', error);
       throw error;
     }
   }

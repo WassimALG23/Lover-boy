@@ -1,4 +1,4 @@
-import { pgTable, text, serial, timestamp, integer, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, timestamp, integer } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -33,17 +33,6 @@ export const songs = pgTable("songs", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-// New submissions table for artist/song proposals
-export const submissions = pgTable("submissions", {
-  id: serial("id").primaryKey(),
-  artistName: text("artist_name").notNull(),
-  songName: text("song_name").notNull(),
-  quote: text("quote").notNull(),
-  imageFile: text("image_file").notNull(),
-  status: text("status").notNull().default('pending'),
-  createdAt: timestamp("created_at").defaultNow(),
-});
-
 // Schema for inserting artists
 export const insertArtistSchema = createInsertSchema(artists).omit({
   id: true,
@@ -56,17 +45,8 @@ export const insertSongSchema = createInsertSchema(songs).omit({
   createdAt: true,
 });
 
-// Schema for submissions
-export const insertSubmissionSchema = createInsertSchema(submissions).omit({
-  id: true,
-  status: true,
-  createdAt: true,
-});
-
 // Types for TypeScript
 export type Artist = typeof artists.$inferSelect;
 export type InsertArtist = z.infer<typeof insertArtistSchema>;
 export type Song = typeof songs.$inferSelect;
 export type InsertSong = z.infer<typeof insertSongSchema>;
-export type Submission = typeof submissions.$inferSelect;
-export type InsertSubmission = z.infer<typeof insertSubmissionSchema>;

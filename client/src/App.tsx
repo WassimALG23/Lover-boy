@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 import MainMenu from "./pages/MainMenu";
 import ArtistSelection from "./pages/ArtistSelection";
 import ArtistShowcase from "./pages/ArtistShowcase";
-import SubmissionForm from "./pages/SubmissionForm";
-import AdminPanel from "./pages/AdminPanel";
 import { Toaster } from "@/components/ui/toaster";
-import { useLocation, Link, Route, Switch } from "wouter";
 import { ARTISTS } from "./lib/constants";
 import "./lib/fonts.css";
 
@@ -13,8 +10,6 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState("main");
   const [selectedArtist, setSelectedArtist] = useState("");
   const [assetsLoaded, setAssetsLoaded] = useState(false);
-  const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
-  const [location] = useLocation();
 
   // Preload all assets when the app starts
   useEffect(() => {
@@ -62,12 +57,14 @@ export default function App() {
     }
   };
 
-  const renderMainContent = () => {
+  const renderPage = () => {
     if (!assetsLoaded) {
       return (
-        <div className="loading-container">
-          <div className="loading-spinner" />
-          <div className="loading-text">Loading your experience</div>
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="text-center">
+            <div className="loading-spinner mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+            <div className="loading-text text-lg font-medium text-white">Loading your experience...</div>
+          </div>
         </div>
       );
     }
@@ -111,36 +108,9 @@ export default function App() {
         }}
       />
 
-      {/* Navigation Buttons */}
-      <div className="fixed top-4 right-4 z-30 flex gap-2">
-        {!isAdminPanelOpen && (
-          <Link href="/admin" onClick={() => setIsAdminPanelOpen(true)} className="admin-button">
-            Admin Panel
-          </Link>
-        )}
-        <Link href="/submit" className="admin-button bg-pink-500/60 hover:bg-pink-500/80">
-          Submit Artist
-        </Link>
-      </div>
-
       {/* Content */}
       <div className="relative z-20">
-        <Switch>
-          <Route path="/admin">
-            <AdminPanel onBack={() => {
-              setIsAdminPanelOpen(false);
-              window.location.href = '/';
-            }} />
-          </Route>
-          <Route path="/submit">
-            <SubmissionForm onBack={() => window.location.href = '/'} />
-          </Route>
-          <Route>
-            <div className="page-transition-enter-active">
-              {renderMainContent()}
-            </div>
-          </Route>
-        </Switch>
+        {renderPage()}
       </div>
       <Toaster />
     </div>
