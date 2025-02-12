@@ -23,7 +23,7 @@ export const ARTISTS: Artist[] = [
     route: "tv-girl", 
     lyric: "i know that we're not allowed to but i want you",
     songName: "Not Allowed",
-    image: "/artists/tv-girl.jpg",
+    image: "/attached_assets/Screenshot_2025-02-12-12-43-54-811_com.spotify.music.png",
     audioUrl: "https://p.scdn.co/mp3-preview/6a46d469b67baa0fe945c0c41f1d45d368b8b57d",
     quoteColor: "text-rose-400"
   },

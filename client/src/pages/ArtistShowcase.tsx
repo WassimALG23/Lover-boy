@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Howl } from "howler";
 import { ARTISTS } from "../lib/constants";
 import StylizedText from "../components/StylizedText";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Volume2, VolumeX } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface ArtistShowcaseProps {
   artistRoute: string;
@@ -14,6 +15,8 @@ interface ArtistShowcaseProps {
 export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcaseProps) {
   const artist = ARTISTS.find(a => a.route === artistRoute);
   const soundRef = useRef<Howl | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     // Clean up previous sound
@@ -27,9 +30,21 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
       soundRef.current = new Howl({
         src: [artist.audioUrl],
         html5: true,
-        autoplay: true,
-        volume: 0.5,
+        format: ['mp3'],
+        onplay: () => setIsPlaying(true),
+        onstop: () => setIsPlaying(false),
+        onend: () => setIsPlaying(false),
+        onloaderror: () => {
+          toast({
+            title: "Error",
+            description: "Failed to load audio. Please try again.",
+            variant: "destructive",
+          });
+        },
       });
+
+      // Start playing
+      soundRef.current.play();
     }
 
     // Cleanup on unmount
@@ -39,7 +54,17 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
         soundRef.current.unload();
       }
     };
-  }, [artist?.audioUrl]);
+  }, [artist?.audioUrl, toast]);
+
+  const togglePlay = () => {
+    if (!soundRef.current) return;
+
+    if (soundRef.current.playing()) {
+      soundRef.current.pause();
+    } else {
+      soundRef.current.play();
+    }
+  };
 
   if (!artist) {
     return <div>Artist not found</div>;
@@ -76,11 +101,19 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
                 {artist.name}
               </h2>
 
-              {/* Song Name */}
-              <div className="text-xl text-center mb-2">
-                <span className="bg-gradient-to-r from-blue-400 to-pink-400 text-transparent bg-clip-text">
+              {/* Song Name and Play Button */}
+              <div className="flex items-center gap-4">
+                <span className="bg-gradient-to-r from-blue-400 to-pink-400 text-transparent bg-clip-text text-xl">
                   {artist.songName}
                 </span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="hover:bg-white/10"
+                  onClick={togglePlay}
+                >
+                  {isPlaying ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                </Button>
               </div>
 
               {/* Lyrics */}
