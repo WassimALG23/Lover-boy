@@ -2,6 +2,26 @@ import { type Artist } from "../../shared/schema";
 
 export const ARTISTS: Artist[] = [
   {
+    name: "K.",
+    route: "k",
+    lyric: "Stay with me, i dont want u to leave",
+    highlighted: "want u to leave",
+    highlightColor: "text-purple-400",
+    songName: "K.",
+    image: "/artists/cigarettes.jpg",
+    audioUrl: "/audio/K. - Cigarettes After Sex.mp3"
+  },
+  {
+    name: "Sweet",
+    route: "sweet",
+    lyric: "Its so sweet, knowing u love me",
+    highlighted: "sweet",
+    highlightColor: "text-pink-400",
+    songName: "Sweet",
+    image: "/artists/cigarettes.jpg",
+    audioUrl: "/audio/Sweet - Cigarettes After Sex.mp3"
+  },
+  {
     name: "Laufey",
     route: "laufey",
     lyric: "confess i loved u from the start",

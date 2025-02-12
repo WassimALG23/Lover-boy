@@ -16,6 +16,16 @@ export default function StylizedText({
 }: StylizedTextProps) {
   const [displayText, setDisplayText] = useState(text);
   const [isTyping, setIsTyping] = useState(true);
+  const [dots, setDots] = useState('.');
+
+  useEffect(() => {
+    if (isTyping) {
+      const dotsInterval = setInterval(() => {
+        setDots(prev => prev === '.' ? '..' : prev === '..' ? '...' : '.');
+      }, 500);
+      return () => clearInterval(dotsInterval);
+    }
+  }, [isTyping]);
 
   useEffect(() => {
     setDisplayText('');
@@ -38,7 +48,7 @@ export default function StylizedText({
   if (!highlighted || !displayText) {
     return (
       <span className={`font-stylized ${className} ${isTyping ? 'opacity-80' : 'opacity-100'}`}>
-        {displayText}
+        {displayText}{isTyping ? dots : ''}
       </span>
     );
   }
