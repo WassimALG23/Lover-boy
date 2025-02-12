@@ -15,6 +15,22 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
   const [isPlaying, setIsPlaying] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  // Preload assets
+  useEffect(() => {
+    // Preload all artist images
+    ARTISTS.forEach(artist => {
+      const img = new Image();
+      img.src = artist.image;
+    });
+
+    // Preload all audio
+    ARTISTS.forEach(artist => {
+      const audio = new Audio();
+      audio.preload = "auto";
+      audio.src = artist.audioUrl;
+    });
+  }, []);
+
   useEffect(() => {
     if (artist) {
       const audio = new Audio(artist.audioUrl);
