@@ -3,7 +3,7 @@ import { ARTISTS } from "../lib/constants";
 import StylizedText from "../components/StylizedText";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Volume2, VolumeX } from "lucide-react";
 
 interface ArtistShowcaseProps {
   artistRoute: string;
@@ -12,7 +12,29 @@ interface ArtistShowcaseProps {
 
 export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcaseProps) {
   const artist = ARTISTS.find(a => a.route === artistRoute);
-  const [showPlayer, setShowPlayer] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [audio] = useState(new Audio());
+
+  useEffect(() => {
+    if (artist?.audioUrl) {
+      audio.src = artist.audioUrl;
+      audio.loop = true;
+    }
+
+    return () => {
+      audio.pause();
+      audio.src = '';
+    };
+  }, [artist?.audioUrl]);
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   if (!artist) {
     return <div>Artist not found</div>;
@@ -50,32 +72,21 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
               </h2>
 
               {/* Song Name and Play Button */}
-              <div className="flex flex-col items-center gap-4">
+              <div className="flex items-center gap-4">
                 <span className="bg-gradient-to-r from-blue-400 to-pink-400 text-transparent bg-clip-text text-xl">
                   {artist.songName}
                 </span>
-                <Button
-                  variant="outline"
-                  className="hover:bg-white/10"
-                  onClick={() => setShowPlayer(!showPlayer)}
-                >
-                  {showPlayer ? "Hide Player" : "Play on Spotify"}
-                </Button>
+                {artist.audioUrl && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="hover:bg-white/10"
+                    onClick={togglePlay}
+                  >
+                    {isPlaying ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                  </Button>
+                )}
               </div>
-
-              {/* Spotify Player */}
-              {showPlayer && (
-                <div className="w-full max-w-md">
-                  <iframe
-                    src={`https://open.spotify.com/embed/track/${artist.spotifyId}`}
-                    width="100%"
-                    height="80"
-                    frameBorder="0"
-                    allow="encrypted-media"
-                    className="rounded-lg"
-                  />
-                </div>
-              )}
 
               {/* Lyrics */}
               <div className="text-xl text-center mb-4">
