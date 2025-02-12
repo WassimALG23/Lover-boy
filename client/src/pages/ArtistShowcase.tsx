@@ -18,14 +18,17 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
   useEffect(() => {
     // Create new audio element when artist changes
     if (artist) {
-      const audio = new Audio(artist.audioUrl);
+      const audio = new Audio(`/attached_assets/${artist.audioUrl.split('/').pop()}`);
       audio.loop = true;
       audio.preload = "auto";
-      audioRef.current = audio;
       
-      // Add error handling
       audio.onerror = (e) => {
         console.error("Error loading audio:", e);
+        setIsPlaying(false);
+      };
+      
+      audio.oncanplaythrough = () => {
+        audioRef.current = audio;
       };
       
       setIsPlaying(false);
