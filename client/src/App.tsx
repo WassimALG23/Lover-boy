@@ -75,8 +75,8 @@ export default function App() {
       case "artists":
         return (
           <ArtistSelection 
-            onSelect={(name) => {
-              setSelectedArtist(name);
+            onSelect={(route) => {
+              setSelectedArtist(route);
               setCurrentPage("showcase");
             }}
             onBack={() => setCurrentPage("main")}
