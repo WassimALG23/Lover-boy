@@ -1,10 +1,6 @@
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .animate-fadeIn {
@@ -27,12 +23,14 @@
   }
 }
 
+/* Enhanced Space Background */
 .space-background {
-  background: black url('/attached_assets/milky-way.webp') center/cover fixed no-repeat;
+  background: black url('/milky-way.webp') center/cover fixed no-repeat;
   position: relative;
   overflow: hidden;
 }
 
+/* Improved Star Animation */
 .space-background::before {
   content: '';
   position: fixed;
@@ -44,21 +42,17 @@
   pointer-events: none;
   background-image: 
     radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0)),
-    radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0)),
-    radial-gradient(1px 1px at 50px 160px, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0)),
-    radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0)),
+    radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0)),
+    radial-gradient(1.5px 1.5px at 50px 160px, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0)),
+    radial-gradient(2px 2px at 90px 40px, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0)),
     radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   animation: space-animation 300s linear infinite;
   will-change: transform;
 }
 
 @keyframes space-animation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .content-layer {
@@ -66,21 +60,68 @@
   z-index: 1;
 }
 
+/* Enhanced Gradient Text Animation */
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400;
   animation: hue-rotate 10s infinite linear;
 }
 
 @keyframes hue-rotate {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
+}
+
+/* Improved Text Outline */
+.outlined-text {
+  text-shadow: 
+    -1px -1px 0 rgba(255,255,255,0.3),
+    1px -1px 0 rgba(255,255,255,0.3),
+    -1px 1px 0 rgba(255,255,255,0.3),
+    1px 1px 0 rgba(255,255,255,0.3);
+}
+
+/* Card Hover Effects */
+.hover-card {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 255, 0.3);
+}
+
+/* Artist Image Hover Effect */
+.artist-image {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.artist-image:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* Page Transition */
+.page-transition {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
   from {
-    filter: hue-rotate(0deg);
+    opacity: 0;
+    transform: translateY(20px);
   }
   to {
-    filter: hue-rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.outlined-text {
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
-  text-stroke: 1px rgba(255, 255, 255, 0.5);
+/* Glowing Effect */
+.glow {
+  box-shadow: 0 0 15px rgba(62, 184, 255, 0.3);
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 15px rgba(62, 184, 255, 0.3); }
+  to { box-shadow: 0 0 25px rgba(255, 62, 184, 0.5); }
 }

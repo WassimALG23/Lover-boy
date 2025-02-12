@@ -36,7 +36,7 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
       const audio = new Audio(artist.audioUrl);
       audio.loop = true;
       audioRef.current = audio;
-      
+
       // Autoplay when component mounts
       const playPromise = audio.play();
       if (playPromise !== undefined) {
@@ -86,20 +86,15 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
   }
 
   return (
-    <div className="min-h-screen animate-fadeIn" style={{
-      backgroundImage: "url('/milky-way.webp')",
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat'
-    }}>
+    <div className="min-h-screen page-transition">
       <div className="content-layer flex flex-col items-center justify-center min-h-screen p-6">
-        <Card className="w-full max-w-2xl bg-black/50 backdrop-blur-md">
+        <Card className="w-full max-w-2xl bg-black/50 backdrop-blur-md hover-card">
           <CardContent className="p-6">
             <div className="flex flex-col items-center gap-6">
               {/* Back Button */}
               <Button 
                 variant="ghost" 
-                className="self-start hover:bg-white/10"
+                className="self-start hover:bg-white/10 glow"
                 onClick={handleBack}
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
@@ -111,7 +106,7 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
                 <img
                   src={artist.image}
                   alt={artist.name}
-                  className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                  className="artist-image w-full h-full object-cover"
                   loading="eager"
                 />
               </div>
@@ -129,10 +124,20 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="hover:bg-white/10 w-24"
+                  className="hover:bg-white/10 glow w-24"
                   onClick={togglePlay}
                 >
-                  {isPlaying ? "Pause" : "Play"}
+                  {isPlaying ? (
+                    <>
+                      <Volume2 className="w-4 h-4 mr-2" />
+                      Pause
+                    </>
+                  ) : (
+                    <>
+                      <VolumeX className="w-4 h-4 mr-2" />
+                      Play
+                    </>
+                  )}
                 </Button>
               </div>
 
