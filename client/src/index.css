@@ -80,8 +80,14 @@
 }
 
 .stylized-text {
-  @apply text-white font-bold tracking-wide;
+  @apply font-bold tracking-wide;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Text box background styles */
+.text-box {
+  @apply bg-black/60 backdrop-blur-sm px-4 py-2 rounded-lg;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .page-transition {

@@ -36,11 +36,8 @@ export default function App() {
           });
         });
 
-        // Wait for all assets to load with a shorter timeout (1.5s)
-        await Promise.race([
-          Promise.all([...imagePromises, ...audioPromises]),
-          new Promise(resolve => setTimeout(resolve, 1500))
-        ]);
+        // Wait for all assets to load completely
+        await Promise.all([...imagePromises, ...audioPromises]);
         setAssetsLoaded(true);
       } catch (error) {
         console.error("Error preloading assets:", error);
@@ -99,7 +96,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-black text-white">
-      {/* Background with overlay */}
+      {/* Background image */}
       <div 
         className="fixed inset-0 z-0"
         style={{
@@ -110,8 +107,6 @@ export default function App() {
           backgroundAttachment: 'fixed'
         }}
       />
-      {/* Dark overlay for better text visibility */}
-      <div className="fixed inset-0 z-10 bg-black/40" />
 
       {/* Content */}
       <div className="relative z-20">
