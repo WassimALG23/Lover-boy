@@ -22,11 +22,18 @@ export default function ArtistSelection({ onSelect, onBack }: ArtistSelectionPro
         </Button>
 
         {/* Title */}
-        <h2 className="text-4xl mb-12 font-bold text-white text-center font-stylized relative">
-          <span className="bg-black/40 px-6 py-2 rounded-lg backdrop-blur-sm">
+        <div className="relative mb-12 flex justify-center">
+          <h2 className="text-4xl font-bold text-white font-stylized 
+                        bg-gradient-to-r from-black/50 via-black/40 to-black/50 
+                        backdrop-blur-md 
+                        px-12 py-4 rounded-2xl
+                        border border-white/10
+                        shadow-lg shadow-black/20
+                        transform hover:scale-105 transition-all duration-300
+                        animate-fadeIn">
             Select an Artist
-          </span>
-        </h2>
+          </h2>
+        </div>
 
         {/* Artist Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
