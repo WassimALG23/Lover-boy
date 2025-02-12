@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import MainMenu from "./pages/MainMenu";
 import ArtistSelection from "./pages/ArtistSelection";
 import ArtistShowcase from "./pages/ArtistShowcase";
+import SubmissionForm from "./pages/SubmissionForm";
+import AdminPanel from "./pages/AdminPanel";
 import { Toaster } from "@/components/ui/toaster";
+import { useLocation, Link, Route, Switch } from "wouter";
 import { ARTISTS } from "./lib/constants";
 import "./lib/fonts.css";
 
@@ -10,6 +13,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState("main");
   const [selectedArtist, setSelectedArtist] = useState("");
   const [assetsLoaded, setAssetsLoaded] = useState(false);
+  const [location] = useLocation();
 
   // Preload all assets when the app starts
   useEffect(() => {
@@ -57,14 +61,12 @@ export default function App() {
     }
   };
 
-  const renderPage = () => {
+  const renderMainContent = () => {
     if (!assetsLoaded) {
       return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="text-center">
-            <div className="loading-spinner mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
-            <div className="loading-text text-lg font-medium text-white">Loading your experience...</div>
-          </div>
+        <div className="loading-container">
+          <div className="loading-spinner" />
+          <div className="loading-text">Loading your experience</div>
         </div>
       );
     }
@@ -108,9 +110,22 @@ export default function App() {
         }}
       />
 
+      {/* Admin Button */}
+      <Link href="/admin" className="admin-button">
+        Admin Panel
+      </Link>
+
       {/* Content */}
       <div className="relative z-20">
-        {renderPage()}
+        <Switch>
+          <Route path="/admin" component={AdminPanel} />
+          <Route path="/submit" component={SubmissionForm} />
+          <Route>
+            <div className="page-transition-enter-active">
+              {renderMainContent()}
+            </div>
+          </Route>
+        </Switch>
       </div>
       <Toaster />
     </div>
