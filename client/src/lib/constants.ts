@@ -1,4 +1,3 @@
-
 import { type Artist } from "../../shared/schema";
 
 export const ARTISTS: Artist[] = [
@@ -23,6 +22,16 @@ export const ARTISTS: Artist[] = [
     audioUrl: "/audio/Arctic Monkeys - I Wanna Be Yours.mp3"
   },
   {
+    name: "beabadoobee",
+    route: "beabadoobee",
+    lyric: "can we be a perfect pair",
+    highlighted: "perfect pair",
+    highlightColor: "text-pink-400",
+    songName: "perfect pair",
+    image: "/artists/beabadoobee.jpg",
+    audioUrl: "/audio/beabadoobee - the perfect pair (Official Audio).mp3"
+  },
+  {
     name: "Mac DeMarco",
     route: "mac-demarco",
     lyric: "just to let u know Ur my kind of women",
@@ -37,7 +46,7 @@ export const ARTISTS: Artist[] = [
     route: "mitski",
     lyric: "i just want you",
     highlighted: "want you",
-    highlightColor: "text-pink-400",
+    highlightColor: "text-blue-400", 
     songName: "I Want You",
     image: "/artists/mitski.jpg",
     audioUrl: "/audio/Mitski - I Want You (Official Video).mp3"
@@ -47,7 +56,7 @@ export const ARTISTS: Artist[] = [
     route: "tv-girl",
     lyric: "i know we're not allowed to date but i just want u",
     highlighted: "not allowed",
-    highlightColor: "text-indigo-400",
+    highlightColor: "text-pink-400", 
     songName: "Not Allowed",
     image: "/artists/tv-girl.jpg",
     audioUrl: "/audio/Not Allowed.mp3"
