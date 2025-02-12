@@ -51,7 +51,8 @@ export default function App() {
       backgroundImage: "url('/milky-way.webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat'
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed'
     }}>
       {renderPage()}
       <Toaster />
