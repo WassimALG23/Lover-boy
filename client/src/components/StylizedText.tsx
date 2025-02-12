@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 
 interface StylizedTextProps {
@@ -31,7 +30,7 @@ export default function StylizedText({
     setDisplayText('');
     setIsTyping(true);
     let currentIndex = 0;
-    
+
     const interval = setInterval(() => {
       if (currentIndex < text.length) {
         setDisplayText(prev => text.slice(0, currentIndex + 1));
@@ -59,13 +58,14 @@ export default function StylizedText({
     <span className={`font-stylized ${className} ${isTyping ? 'opacity-80' : 'opacity-100'}`}>
       {segments.map((segment, index) => (
         segment.toLowerCase() === highlighted.toLowerCase() ? (
-          <span key={index} className={`font-stylized ${highlightColor}`}>
+          <span key={index} className={`font-bold ${highlightColor} transition-colors duration-300`}>
             {segment}
           </span>
         ) : (
           <span key={index}>{segment}</span>
         )
       ))}
+      {isTyping ? dots : ''}
     </span>
   );
 }
