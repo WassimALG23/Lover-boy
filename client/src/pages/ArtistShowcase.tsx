@@ -102,7 +102,7 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
               </Button>
 
               {/* Artist Image */}
-              <div className="w-64 h-64 relative overflow-hidden rounded-lg bg-gradient-to-br from-blue-900/50 to-purple-900/50">
+              <div className="w-64 h-64 relative overflow-hidden rounded-lg">
                 <img
                   src={artist.image}
                   alt={artist.name}
@@ -112,13 +112,13 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
               </div>
 
               {/* Artist Name */}
-              <h2 className="text-2xl font-bold gradient-text outlined-text font-stylized">
+              <h2 className="text-2xl font-bold stylized-text font-stylized">
                 {artist.name}
               </h2>
 
               {/* Song Name and Play Button */}
               <div className="flex items-center gap-4">
-                <span className="gradient-text outlined-text text-xl">
+                <span className="stylized-text text-xl">
                   {artist.songName}
                 </span>
                 <Button
