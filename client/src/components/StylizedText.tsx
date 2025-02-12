@@ -19,13 +19,13 @@ export default function StylizedText({
   const highlightedText = highlighted.replace(/"/g, '');
 
   return (
-    <span className={`font-stylized ${className}`}>
+    <span className={`font-stylized text-lg ${className}`}>
       {parts.map((part, index) => (
         <span key={index}>
           {part}
           {index < parts.length - 1 && (
-            <span className={`font-bold ${highlightColor}`}>
-              "{highlightedText}"
+            <span className={`text-2xl font-bold ${highlightColor}`}>
+              "<span className="text-white">{highlightedText}</span>"
             </span>
           )}
         </span>

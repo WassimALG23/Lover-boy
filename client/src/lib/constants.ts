@@ -12,8 +12,8 @@ export const ARTISTS: Artist[] = [
   {
     name: "Mac DeMarco",
     route: "mac-demarco",
-    lyric: "just to let u know",
-    songName: "My Kind of Woman",
+    lyric: "just to let u know \"Ur my kind of women\"",
+    songName: "Ur my kind of women",
     image: "/artists/mac-demarco.jpg",
     audioUrl: "https://p.scdn.co/mp3-preview/3c3f0bfb4b3994490cf3f08cd8801018f9e84444",
     quoteColor: "text-emerald-400"
@@ -23,7 +23,7 @@ export const ARTISTS: Artist[] = [
     route: "tv-girl", 
     lyric: "i know we're not allowed to date but i just want u",
     songName: "Not Allowed",
-    image: "/artists/tv-girl.jpg",
+    image: "/artists/adrianne-lenker.jpg", 
     audioUrl: "https://p.scdn.co/mp3-preview/6a46d469b67baa0fe945c0c41f1d45d368b8b57d",
     quoteColor: "text-rose-400"
   },
@@ -50,7 +50,7 @@ export const ARTISTS: Artist[] = [
     route: "alex-g",
     lyric: "ik we have things to do but i love u",
     songName: "Things to Do",
-    image: "/artists/alex-g.jpg",
+    image: "/artists/alex-g.jpg", 
     audioUrl: "https://p.scdn.co/mp3-preview/f5e7c96b50c5321e601bfec0a96c9e543ad8bee2",
     quoteColor: "text-yellow-400"
   },
@@ -68,7 +68,7 @@ export const ARTISTS: Artist[] = [
     route: "adrianne-lenker",
     lyric: "i just want to be anything with u",
     songName: "Anything",
-    image: "/artists/adrianne-lenker.jpg",
+    image: "/artists/tv-girl.jpg", 
     audioUrl: "https://p.scdn.co/mp3-preview/9c5cb4c974c87d9d88d87c0c6c3b20f76c87c5f1",
     quoteColor: "text-orange-400"
   }
