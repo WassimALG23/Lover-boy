@@ -24,8 +24,7 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
-          audio.pause();
-          setIsPlaying(false);
+          setIsPlaying(true);
         }).catch(error => {
           console.error("Error loading audio:", error);
           setIsPlaying(false);
