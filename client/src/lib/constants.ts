@@ -12,7 +12,7 @@ export const ARTISTS: Artist[] = [
   {
     name: "Mac DeMarco",
     route: "mac-demarco",
-    lyric: "just to let u know \"Ur my kind of women\"",
+    lyric: "just to let u know Ur my kind of women",
     songName: "Ur my kind of women",
     image: "/artists/mac-demarco.jpg",
     audioUrl: "https://p.scdn.co/mp3-preview/3c3f0bfb4b3994490cf3f08cd8801018f9e84444",
