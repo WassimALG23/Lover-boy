@@ -16,15 +16,11 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Create new audio element when artist changes
     if (artist) {
       const audio = new Audio(artist.audioUrl);
       audio.loop = true;
       audio.preload = "auto";
-      
-      audio.addEventListener('canplaythrough', () => {
-        audioRef.current = audio;
-      });
+      audioRef.current = audio;
       
       audio.addEventListener('error', (e) => {
         console.error("Error loading audio:", e);
@@ -34,7 +30,6 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
       setIsPlaying(false);
     }
 
-    // Cleanup function
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
