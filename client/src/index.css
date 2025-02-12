@@ -62,46 +62,60 @@
 
 /* Clean Text Styling */
 .stylized-text {
-  @apply text-white font-bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  @apply text-white font-bold tracking-wide;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Card Hover Effects */
-.hover-card {
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+/* Enhanced Card Styles */
+.card-glass {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 0 80px rgba(255, 255, 255, 0.05);
 }
 
-.hover-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 255, 0.3);
+/* Smooth Image Transitions */
+.image-hover {
+  @apply transition-all duration-700 ease-out;
 }
 
-/* Artist Image Hover Effect */
-.artist-image {
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+.image-hover:hover {
+  @apply scale-105;
+  filter: brightness(1.1);
 }
 
-.artist-image:hover {
-  transform: scale(1.05) rotate(2deg);
-}
-
-/* Page Transition */
+/* Page Transitions */
 .page-transition {
-  animation: slideIn 0.5s ease-out;
+  animation: fadeScale 0.5s ease-out;
 }
 
-@keyframes slideIn {
+@keyframes fadeScale {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
+}
+
+/* Interactive Elements */
+.interactive {
+  @apply transition-all duration-300;
+}
+
+.interactive:hover {
+  @apply transform -translate-y-1;
 }
 
 /* Subtle Glow Effect */
 .glow {
-  box-shadow: 0 0 15px rgba(62, 184, 255, 0.3);
+  box-shadow: 0 0 15px rgba(62, 184, 255, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.glow:hover {
+  box-shadow: 0 0 25px rgba(62, 184, 255, 0.4);
 }
