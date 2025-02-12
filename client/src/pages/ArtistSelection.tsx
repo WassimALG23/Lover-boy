@@ -1,4 +1,6 @@
+
 import { ARTISTS } from "../lib/constants";
+import ArtistCard from "../components/ArtistCard";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
@@ -25,16 +27,15 @@ export default function ArtistSelection({ onSelect, onBack }: ArtistSelectionPro
         Select an Artist
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl">
         {ARTISTS.map((artist) => (
-          <Button
+          <div 
             key={artist.route}
-            className="w-48 h-16 text-lg hover:scale-105 transition-transform
-                      bg-gradient-to-r from-blue-600 to-pink-600 hover:from-blue-500 hover:to-pink-500"
+            className="cursor-pointer transform transition-all hover:scale-105"
             onClick={() => onSelect(artist.route)}
           >
-            {artist.name}
-          </Button>
+            <ArtistCard artist={artist} />
+          </div>
         ))}
       </div>
     </div>
