@@ -5,6 +5,7 @@ export interface Artist {
   songName: string;
   image: string;
   audioUrl: string;
+  quoteColor: string;
 }
 
 export const ARTISTS: Artist[] = [
@@ -14,7 +15,8 @@ export const ARTISTS: Artist[] = [
     lyric: "just to let u know",
     songName: "My Kind of Woman",
     image: "/artists/mac-demarco.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/3c3f0bfb4b3994490cf3f08cd8801018f9e84444"
+    audioUrl: "https://p.scdn.co/mp3-preview/3c3f0bfb4b3994490cf3f08cd8801018f9e84444",
+    quoteColor: "text-emerald-400"
   },
   {
     name: "TV Girl",
@@ -22,7 +24,8 @@ export const ARTISTS: Artist[] = [
     lyric: "i know we're not allowed to date but i just want u",
     songName: "Not Allowed",
     image: "/artists/tv-girl.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/6a46d469b67baa0fe945c0c41f1d45d368b8b57d"
+    audioUrl: "https://p.scdn.co/mp3-preview/6a46d469b67baa0fe945c0c41f1d45d368b8b57d",
+    quoteColor: "text-rose-400"
   },
   {
     name: "Mitski",
@@ -30,7 +33,8 @@ export const ARTISTS: Artist[] = [
     lyric: "i just want you",
     songName: "I Want You",
     image: "/artists/mitski.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/1c5b2e823e0acf5d7b6aa7df1b7e5364a0837026"
+    audioUrl: "https://p.scdn.co/mp3-preview/1c5b2e823e0acf5d7b6aa7df1b7e5364a0837026",
+    quoteColor: "text-blue-400"
   },
   {
     name: "Arctic Monkeys",
@@ -38,7 +42,8 @@ export const ARTISTS: Artist[] = [
     lyric: "i just wanna be urs",
     songName: "I Wanna Be Yours",
     image: "/artists/arctic-monkeys.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/c12c4d92454bc8fdeea5d5a9a5b8da0995e6f26f"
+    audioUrl: "https://p.scdn.co/mp3-preview/c12c4d92454bc8fdeea5d5a9a5b8da0995e6f26f",
+    quoteColor: "text-purple-400"
   },
   {
     name: "Alex G",
@@ -46,7 +51,8 @@ export const ARTISTS: Artist[] = [
     lyric: "ik we have things to do but i love u",
     songName: "Things to Do",
     image: "/artists/alex-g.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/f5e7c96b50c5321e601bfec0a96c9e543ad8bee2"
+    audioUrl: "https://p.scdn.co/mp3-preview/f5e7c96b50c5321e601bfec0a96c9e543ad8bee2",
+    quoteColor: "text-yellow-400"
   },
   {
     name: "Tyler, The Creator",
@@ -54,7 +60,8 @@ export const ARTISTS: Artist[] = [
     lyric: "i will treat u better im not like him",
     songName: "Like Him",
     image: "/artists/tyler.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/ba04068706dcd1f025df83f9bf71c5abe4f98ada"
+    audioUrl: "https://p.scdn.co/mp3-preview/ba04068706dcd1f025df83f9bf71c5abe4f98ada",
+    quoteColor: "text-cyan-400"
   },
   {
     name: "Adrianne Lenker",
@@ -62,6 +69,7 @@ export const ARTISTS: Artist[] = [
     lyric: "i just want to be anything with u",
     songName: "Anything",
     image: "/artists/adrianne-lenker.jpg",
-    audioUrl: "https://p.scdn.co/mp3-preview/9c5cb4c974c87d9d88d87c0c6c3b20f76c87c5f1"
+    audioUrl: "https://p.scdn.co/mp3-preview/9c5cb4c974c87d9d88d87c0c6c3b20f76c87c5f1",
+    quoteColor: "text-orange-400"
   }
 ];

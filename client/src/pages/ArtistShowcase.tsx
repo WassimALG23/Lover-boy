@@ -31,37 +31,43 @@ export default function ArtistShowcase() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6">
-      <Card className="w-full max-w-2xl bg-black/50 backdrop-blur">
-        <CardContent className="p-6">
-          <div className="flex flex-col items-center gap-6">
-            <img
-              src={artist.image}
-              alt={artist.name}
-              className="w-64 h-64 object-cover rounded-lg shadow-xl"
-            />
-            
-            <h2 className="text-2xl font-bold text-white font-stylized">
-              {artist.name}
-            </h2>
-            
-            <div className="text-xl text-center mb-4">
-              <StylizedText
-                text={artist.lyric}
-                highlighted={artist.songName}
-                className="text-white/90"
-              />
-            </div>
+    <div className="space-background min-h-screen">
+      <div className="content-layer flex flex-col items-center justify-center min-h-screen p-6">
+        <Card className="w-full max-w-2xl bg-black/50 backdrop-blur-md">
+          <CardContent className="p-6">
+            <div className="flex flex-col items-center gap-6">
+              <div className="w-64 h-64 relative overflow-hidden rounded-lg bg-gradient-to-br from-blue-900/50 to-purple-900/50">
+                <img
+                  src={artist.image}
+                  alt={artist.name}
+                  className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                  loading="eager"
+                />
+              </div>
 
-            <Button
-              className="bg-gradient-to-r from-blue-600 to-pink-600 hover:from-blue-500 hover:to-pink-500"
-              asChild
-            >
-              <a href="/artists">Back to Artists</a>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+              <h2 className="text-2xl font-bold text-white font-stylized">
+                {artist.name}
+              </h2>
+
+              <div className="text-xl text-center mb-4">
+                <StylizedText
+                  text={artist.lyric}
+                  highlighted={artist.songName}
+                  className="text-white/90"
+                  highlightColor={artist.quoteColor}
+                />
+              </div>
+
+              <Button
+                className="bg-gradient-to-r from-blue-600 to-pink-600 hover:from-blue-500 hover:to-pink-500"
+                asChild
+              >
+                <a href="/artists">Back to Artists</a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

@@ -2,9 +2,15 @@ interface StylizedTextProps {
   text: string;
   highlighted?: string;
   className?: string;
+  highlightColor?: string;
 }
 
-export default function StylizedText({ text, highlighted, className = "" }: StylizedTextProps) {
+export default function StylizedText({ 
+  text, 
+  highlighted, 
+  className = "",
+  highlightColor = "gradient-text"
+}: StylizedTextProps) {
   if (!highlighted) {
     return <span className={`font-stylized ${className}`}>{text}</span>;
   }
@@ -15,14 +21,14 @@ export default function StylizedText({ text, highlighted, className = "" }: Styl
   return (
     <span className={`font-stylized ${className}`}>
       {parts.map((part, index) => (
-        <>
+        <span key={index}>
           {part}
           {index < parts.length - 1 && (
-            <span className="gradient-text font-bold">
+            <span className={`font-bold ${highlightColor}`}>
               "{highlightedText}"
             </span>
           )}
-        </>
+        </span>
       ))}
     </span>
   );
