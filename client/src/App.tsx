@@ -15,7 +15,7 @@ export default function App() {
   useEffect(() => {
     const preloadAssets = async () => {
       try {
-        // Preload all images
+        // Preload all images in parallel
         const imagePromises = ARTISTS.map(artist => {
           return new Promise((resolve, reject) => {
             const img = new Image();
@@ -25,7 +25,7 @@ export default function App() {
           });
         });
 
-        // Preload all audio
+        // Preload all audio in parallel
         const audioPromises = ARTISTS.map(artist => {
           return new Promise((resolve, reject) => {
             const audio = new Audio();
@@ -36,10 +36,10 @@ export default function App() {
           });
         });
 
-        // Wait for all assets to load
+        // Wait for all assets to load with a shorter timeout (1.5s)
         await Promise.race([
           Promise.all([...imagePromises, ...audioPromises]),
-          new Promise(resolve => setTimeout(resolve, 2000))
+          new Promise(resolve => setTimeout(resolve, 1500))
         ]);
         setAssetsLoaded(true);
       } catch (error) {
@@ -53,12 +53,9 @@ export default function App() {
   }, []);
 
   const handleBack = () => {
-    // If we're in showcase, go back to artists selection
     if (currentPage === "showcase") {
       setCurrentPage("artists");
-    }
-    // If we're in artists selection, go back to main menu
-    else if (currentPage === "artists") {
+    } else if (currentPage === "artists") {
       setCurrentPage("main");
     }
   };
@@ -66,9 +63,11 @@ export default function App() {
   const renderPage = () => {
     if (!assetsLoaded) {
       return (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <div className="loading-text">Loading assets</div>
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="text-center">
+            <div className="loading-spinner mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+            <div className="loading-text text-lg font-medium text-white">Loading your experience...</div>
+          </div>
         </div>
       );
     }
@@ -99,14 +98,25 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white" style={{
-      backgroundImage: "url('/background.jpg')",
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundAttachment: 'fixed'
-    }}>
-      {renderPage()}
+    <div className="relative min-h-screen bg-black text-white">
+      {/* Background with overlay */}
+      <div 
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: "url('/background.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed'
+        }}
+      />
+      {/* Dark overlay for better text visibility */}
+      <div className="fixed inset-0 z-10 bg-black/40" />
+
+      {/* Content */}
+      <div className="relative z-20">
+        {renderPage()}
+      </div>
       <Toaster />
     </div>
   );
