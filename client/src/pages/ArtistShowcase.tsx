@@ -19,13 +19,18 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
     if (artist) {
       const audio = new Audio(artist.audioUrl);
       audio.loop = true;
-      audio.preload = "auto";
       audioRef.current = audio;
       
-      audio.addEventListener('error', (e) => {
-        console.error("Error loading audio:", e);
-        setIsPlaying(false);
-      });
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          audio.pause();
+          setIsPlaying(false);
+        }).catch(error => {
+          console.error("Error loading audio:", error);
+          setIsPlaying(false);
+        });
+      }
 
       return () => {
         if (audioRef.current) {

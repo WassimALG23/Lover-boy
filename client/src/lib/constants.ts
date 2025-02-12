@@ -6,10 +6,11 @@ export const ARTISTS: Artist[] = [
     name: "Adrianne Lenker",
     route: "adrianne-lenker",
     lyric: "i just want to be anything with u",
+    highlighted: "anything",
+    highlightColor: "text-green-400",
     songName: "Anything",
     image: "/artists/adrianne-lenker.jpg",
-    audioUrl: "/audio/adrianne lenker - anything (official audio).mp3",
-    quoteColor: "text-green-400"
+    audioUrl: "/audio/adrianne lenker - anything (official audio).mp3"
   },
   {
     name: "Arctic Monkeys",
@@ -19,8 +20,7 @@ export const ARTISTS: Artist[] = [
     highlightColor: "text-blue-400",
     songName: "I Wanna Be Yours",
     image: "/artists/arctic-monkeys.jpg",
-    audioUrl: "/audio/Arctic Monkeys - I Wanna Be Yours.mp3",
-    quoteColor: "text-purple-400"
+    audioUrl: "/audio/Arctic Monkeys - I Wanna Be Yours.mp3"
   },
   {
     name: "Mac DeMarco",
@@ -30,26 +30,27 @@ export const ARTISTS: Artist[] = [
     highlightColor: "text-purple-400",
     songName: "My Kind Of Woman",
     image: "/artists/mac-demarco.jpg",
-    audioUrl: "/audio/Mac DeMarco  My Kind Of Woman.mp3",
-    quoteColor: "text-blue-400"
+    audioUrl: "/audio/Mac DeMarco  My Kind Of Woman.mp3"
   },
   {
     name: "Mitski",
     route: "mitski",
     lyric: "i just want you",
+    highlighted: "want you",
+    highlightColor: "text-pink-400",
     songName: "I Want You",
     image: "/artists/mitski.jpg",
-    audioUrl: "/audio/Mitski - I Want You (Official Video).mp3",
-    quoteColor: "text-pink-400"
+    audioUrl: "/audio/Mitski - I Want You (Official Video).mp3"
   },
   {
     name: "TV Girl",
     route: "tv-girl",
     lyric: "i know we're not allowed to date but i just want u",
+    highlighted: "not allowed",
+    highlightColor: "text-indigo-400",
     songName: "Not Allowed",
     image: "/artists/tv-girl.jpg",
-    audioUrl: "/audio/Not Allowed.mp3",
-    quoteColor: "text-indigo-400"
+    audioUrl: "/audio/Not Allowed.mp3"
   },
   {
     name: "Tyler, The Creator",
