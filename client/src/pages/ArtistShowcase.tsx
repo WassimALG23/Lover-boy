@@ -12,7 +12,7 @@ interface ArtistShowcaseProps {
 
 export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcaseProps) {
   const artist = ARTISTS.find(a => a.route === artistRoute);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -21,6 +21,7 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
       audio.loop = true;
       audioRef.current = audio;
       
+      // Autoplay when component mounts
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
@@ -31,6 +32,7 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
         });
       }
 
+      // Cleanup when unmounting or changing artists
       return () => {
         if (audioRef.current) {
           audioRef.current.pause();
@@ -38,13 +40,6 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
         }
       };
     }
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
   }, [artist?.audioUrl]);
 
   const handleBack = () => {
@@ -60,13 +55,12 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
     try {
       if (isPlaying) {
         audioRef.current.pause();
-        setIsPlaying(false);
       } else {
         await audioRef.current.play();
-        setIsPlaying(true);
       }
+      setIsPlaying(!isPlaying);
     } catch (error) {
-      console.error("Error playing audio:", error);
+      console.error("Error toggling audio:", error);
       setIsPlaying(false);
     }
   };
@@ -119,10 +113,10 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="hover:bg-white/10"
+                  className="hover:bg-white/10 w-24"
                   onClick={togglePlay}
                 >
-                  {isPlaying ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                  {isPlaying ? "Pause" : "Play"}
                 </Button>
               </div>
 
