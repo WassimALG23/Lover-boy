@@ -24,11 +24,9 @@
 }
 
 .space-background {
-  background: #fdf2f8 url('/milky-way.webp') center/cover fixed no-repeat;
+  background: #fdf2f8 url('/background.jpg') center/cover fixed no-repeat;
   position: relative;
   overflow: hidden;
-  background-image: url('/background.jpg');
-  background-size: 200px;
 }
 
 @keyframes dots {
