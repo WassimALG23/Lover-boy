@@ -21,7 +21,7 @@ export const ARTISTS: Artist[] = [
   {
     name: "TV Girl",
     route: "tv-girl", 
-    lyric: "i know we're not allowed to date but i just want u",
+    lyric: "i know that we're not allowed to but i want you",
     songName: "not allowed",
     image: "/artists/tv-girl.jpg", 
     audioUrl: "https://p.scdn.co/mp3-preview/6a46d469b67baa0fe945c0c41f1d45d368b8b57d",
@@ -39,8 +39,8 @@ export const ARTISTS: Artist[] = [
   {
     name: "Arctic Monkeys",
     route: "arctic-monkeys",
-    lyric: "i just wanna be urs",
-    songName: "i just wanna be urs",
+    lyric: "i wanna be yours",
+    songName: "i wanna be yours",
     image: "/artists/arctic-monkeys.jpg",
     audioUrl: "https://p.scdn.co/mp3-preview/c12c4d92454bc8fdeea5d5a9a5b8da0995e6f26f",
     quoteColor: "text-purple-400"

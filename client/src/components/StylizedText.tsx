@@ -14,20 +14,20 @@ export default function StylizedText({
   className = "",
   highlightColor = "text-pink-500"
 }: StylizedTextProps) {
-  const [displayText, setDisplayText] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
+  const [displayText, setDisplayText] = useState(text);
+  const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
     setDisplayText('');
-    setIsComplete(false);
+    setIsTyping(true);
     let currentIndex = 0;
     
     const interval = setInterval(() => {
       if (currentIndex < text.length) {
-        setDisplayText(prev => prev + text[currentIndex]);
+        setDisplayText(prev => text.slice(0, currentIndex + 1));
         currentIndex++;
       } else {
-        setIsComplete(true);
+        setIsTyping(false);
         clearInterval(interval);
       }
     }, 50);
@@ -35,28 +35,26 @@ export default function StylizedText({
     return () => clearInterval(interval);
   }, [text]);
 
-  if (!highlighted) {
+  if (!highlighted || !displayText) {
     return (
-      <span className={`font-stylized ${className} ${isComplete ? 'opacity-100' : 'opacity-80'}`}>
+      <span className={`font-stylized ${className} ${isTyping ? 'opacity-80' : 'opacity-100'}`}>
         {displayText}
       </span>
     );
   }
 
-  const parts = displayText.split(highlighted);
-  const highlightedText = highlighted?.replace(/"/g, '') || '';
+  const segments = displayText.split(new RegExp(`(${highlighted})`, 'gi'));
 
   return (
-    <span className={`font-stylized ${className} ${isComplete ? 'opacity-100' : 'opacity-80'}`}>
-      {parts.map((part, index) => (
-        <span key={index}>
-          {part}
-          {index < parts.length - 1 && (
-            <span className={`font-stylized ${highlightColor}`}>
-              {highlightedText}
-            </span>
-          )}
-        </span>
+    <span className={`font-stylized ${className} ${isTyping ? 'opacity-80' : 'opacity-100'}`}>
+      {segments.map((segment, index) => (
+        segment.toLowerCase() === highlighted.toLowerCase() ? (
+          <span key={index} className={`font-stylized ${highlightColor}`}>
+            {segment}
+          </span>
+        ) : (
+          <span key={index}>{segment}</span>
+        )
       ))}
     </span>
   );
