@@ -100,7 +100,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-black text-white" style={{
-      backgroundImage: "url('/milky-way.webp')",
+      backgroundImage: "url('/background.jpg')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
