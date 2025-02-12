@@ -8,7 +8,7 @@ export const ARTISTS: Artist[] = [
     highlighted: "anything",
     highlightColor: "text-green-400",
     songName: "Anything",
-    image: "/artists/adrianne-lenker.jpg",
+    image: "/artists/adrianne-lenker-watercolor.jpg",
     audioUrl: "/audio/adrianne lenker - anything (official audio).mp3"
   },
   {
@@ -65,9 +65,10 @@ export const ARTISTS: Artist[] = [
     name: "Tyler, The Creator",
     route: "tyler-the-creator",
     lyric: "i will treat u better im not like him",
+    highlighted: "like him",
+    highlightColor: "text-yellow-400",
     songName: "Like Him",
     image: "/artists/tyler.jpg",
-    audioUrl: "/audio/Tyler, The Creator - Like Him (feat. LolaYoung) Lyrics @TylerTheCreator.mp3",
-    quoteColor: "text-yellow-400"
+    audioUrl: "/audio/Tyler, The Creator - Like Him (feat. LolaYoung) Lyrics @TylerTheCreator.mp3"
   }
 ];
