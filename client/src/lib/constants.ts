@@ -16,60 +16,60 @@ export const ARTISTS: Artist[] = [
     songName: "Ur my kind of women",
     image: "/artists/mac-demarco.jpg",
     audioUrl: "https://p.scdn.co/mp3-preview/3c3f0bfb4b3994490cf3f08cd8801018f9e84444",
-    quoteColor: "gradient-text"
+    quoteColor: "text-emerald-400"
   },
   {
     name: "TV Girl",
     route: "tv-girl", 
-    lyric: "i know we're \"not allowed\" to date but i just want u",
+    lyric: "i know we're not allowed to date but i just want u",
     songName: "not allowed",
     image: "/artists/tv-girl.jpg", 
     audioUrl: "https://p.scdn.co/mp3-preview/6a46d469b67baa0fe945c0c41f1d45d368b8b57d",
-    quoteColor: "gradient-text"
+    quoteColor: "text-rose-400"
   },
   {
     name: "Mitski",
     route: "mitski",
-    lyric: "i just \"want you\"",
+    lyric: "i just want you",
     songName: "want you",
     image: "/artists/mitski.jpg",
     audioUrl: "https://p.scdn.co/mp3-preview/1c5b2e823e0acf5d7b6aa7df1b7e5364a0837026",
-    quoteColor: "gradient-text"
+    quoteColor: "text-blue-400"
   },
   {
     name: "Arctic Monkeys",
     route: "arctic-monkeys",
-    lyric: "\"i just wanna be urs\"",
+    lyric: "i just wanna be urs",
     songName: "i just wanna be urs",
     image: "/artists/arctic-monkeys.jpg",
     audioUrl: "https://p.scdn.co/mp3-preview/c12c4d92454bc8fdeea5d5a9a5b8da0995e6f26f",
-    quoteColor: "gradient-text"
+    quoteColor: "text-purple-400"
   },
   {
     name: "Alex G",
     route: "alex-g",
-    lyric: "ik we have \"things to do\" but i love u",
+    lyric: "ik we have things to do but i love u",
     songName: "things to do",
     image: "/artists/alex-g.jpg", 
     audioUrl: "https://p.scdn.co/mp3-preview/f5e7c96b50c5321e601bfec0a96c9e543ad8bee2",
-    quoteColor: "gradient-text"
+    quoteColor: "text-yellow-400"
   },
   {
     name: "Tyler, The Creator",
     route: "tyler-the-creator",
-    lyric: "i will treat u better im not \"like him\"",
+    lyric: "i will treat u better im not like him",
     songName: "like him",
     image: "/artists/tyler.jpg",
     audioUrl: "https://p.scdn.co/mp3-preview/ba04068706dcd1f025df83f9bf71c5abe4f98ada",
-    quoteColor: "gradient-text"
+    quoteColor: "text-cyan-400"
   },
   {
     name: "Adrianne Lenker",
     route: "adrianne-lenker",
-    lyric: "i just want to be \"anything\" with u",
+    lyric: "i just want to be anything with u",
     songName: "anything",
     image: "/artists/adrianne-lenker.jpg", 
     audioUrl: "https://p.scdn.co/mp3-preview/9c5cb4c974c87d9d88d87c0c6c3b20f76c87c5f1",
-    quoteColor: "gradient-text"
+    quoteColor: "text-orange-400"
   }
 ];
