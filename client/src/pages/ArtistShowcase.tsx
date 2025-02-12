@@ -120,7 +120,7 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
               {/* Lyrics */}
               <div className="text-xl text-center mb-4">
                 <StylizedText
-                  text={artist.lyric}
+                  text={`"${artist.lyric}"`}
                   highlighted={artist.songName}
                   className="text-white/90"
                   highlightColor={artist.quoteColor}
