@@ -1,7 +1,6 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
-import { seedData } from "./seed";
 
 const app = express();
 app.use(express.json());
@@ -59,16 +58,8 @@ app.use((req, res, next) => {
 
     // Start server
     const PORT = 5000;
-    server.listen(PORT, "0.0.0.0", async () => {
+    server.listen(PORT, "0.0.0.0", () => {
       log(`Server started on port ${PORT}`);
-
-      // Seed initial data
-      try {
-        await seedData();
-        log("Database seeded successfully");
-      } catch (error) {
-        console.error("Error seeding database:", error);
-      }
     });
   } catch (error) {
     console.error("Failed to start server:", error);
