@@ -47,7 +47,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white" style={{
+      backgroundImage: "url('/milky-way.webp')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}>
       {renderPage()}
       <Toaster />
     </div>
