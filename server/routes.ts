@@ -6,7 +6,7 @@ import express from "express";
 
 export function registerRoutes(app: Express): Server {
   // Serve static files from the public directory
-  app.use("/artists", express.static(path.join(process.cwd(), "client", "public", "artists")));
+  app.use(express.static(path.join(process.cwd(), "client", "public")));
 
   // API routes
   app.get("/api/artists", async (_req, res) => {
