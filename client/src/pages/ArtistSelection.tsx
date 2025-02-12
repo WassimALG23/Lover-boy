@@ -1,7 +1,6 @@
 import { ARTISTS } from "../lib/constants";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import ArtistCard from "../components/ArtistCard";
 
 interface ArtistSelectionProps {
   onSelect: (route: string) => void;
@@ -10,30 +9,49 @@ interface ArtistSelectionProps {
 
 export default function ArtistSelection({ onSelect, onBack }: ArtistSelectionProps) {
   return (
-    <div className="min-h-screen flex flex-col items-center gap-8 p-8 animate-fadeIn">
-      <div className="w-full max-w-7xl">
+    <div className="min-h-screen flex flex-col items-center p-8 animate-fadeIn">
+      <div className="w-full max-w-4xl">
+        {/* Back Button */}
         <Button 
           variant="ghost" 
-          className="mb-4 hover:bg-white/10 interactive"
+          className="mb-8 hover:bg-white/10 transition-colors"
           onClick={onBack}
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Menu
         </Button>
 
-        <h2 className="text-4xl mb-8 font-bold text-white/90 text-center font-stylized">
+        {/* Title */}
+        <h2 className="text-4xl mb-12 font-bold text-white text-center font-stylized">
           Select an Artist
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Artist Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {ARTISTS.map((artist) => (
-            <ArtistCard
+            <Button
               key={artist.route}
-              artist={artist}
               onClick={() => onSelect(artist.route)}
-              className="h-full interactive"
-              showLyrics={true}
-            />
+              className="h-24 relative overflow-hidden group bg-black/30 
+                         border border-white/10 hover:border-white/30
+                         backdrop-blur-sm transition-all duration-300"
+            >
+              {/* Hover Background Effect */}
+              <div className="absolute inset-0 bg-white/5 opacity-0 
+                            group-hover:opacity-100 transition-opacity duration-300" />
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col items-center justify-center gap-2">
+                <span className="text-2xl font-stylized text-white/90 
+                               group-hover:text-white transition-colors duration-300">
+                  {artist.name}
+                </span>
+                <span className="text-sm text-white/60 group-hover:text-white/80 
+                               transition-colors duration-300">
+                  {artist.songName}
+                </span>
+              </div>
+            </Button>
           ))}
         </div>
       </div>
