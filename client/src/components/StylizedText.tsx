@@ -24,8 +24,8 @@ export default function StylizedText({
         <span key={index}>
           {part}
           {index < parts.length - 1 && (
-            <span className={`text-2xl font-bold ${highlightColor}`}>
-              "<span className="text-white">{highlightedText}</span>"
+            <span className={`text-2xl font-stylized italic ${highlightColor}`}>
+              "<span className="text-white font-stylized">{highlightedText}</span>"
             </span>
           )}
         </span>
