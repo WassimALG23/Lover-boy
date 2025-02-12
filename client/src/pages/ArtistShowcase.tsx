@@ -1,14 +1,18 @@
+
 import { useEffect, useRef } from "react";
-import { useParams } from "wouter";
 import { Howl } from "howler";
 import { ARTISTS } from "../lib/constants";
 import StylizedText from "../components/StylizedText";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-export default function ArtistShowcase() {
-  const { name } = useParams();
-  const artist = ARTISTS.find(a => a.route === name);
+interface ArtistShowcaseProps {
+  artistRoute: string;
+  onBack: () => void;
+}
+
+export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcaseProps) {
+  const artist = ARTISTS.find(a => a.route === artistRoute);
   const soundRef = useRef<Howl | null>(null);
 
   useEffect(() => {
@@ -31,7 +35,7 @@ export default function ArtistShowcase() {
   }
 
   return (
-    <div className="space-background min-h-screen">
+    <div className="space-background min-h-screen animate-fadeIn">
       <div className="content-layer flex flex-col items-center justify-center min-h-screen p-6">
         <Card className="w-full max-w-2xl bg-black/50 backdrop-blur-md">
           <CardContent className="p-6">
@@ -60,9 +64,9 @@ export default function ArtistShowcase() {
 
               <Button
                 className="bg-gradient-to-r from-blue-600 to-pink-600 hover:from-blue-500 hover:to-pink-500"
-                asChild
+                onClick={onBack}
               >
-                <a href="/artists">Back to Artists</a>
+                Back to Artists
               </Button>
             </div>
           </CardContent>
