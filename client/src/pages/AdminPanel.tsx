@@ -13,7 +13,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
-export default function AdminPanel() {
+interface AdminPanelProps {
+  onBack: () => void;
+}
+
+export default function AdminPanel({ onBack }: AdminPanelProps) {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedSubmissionId, setSelectedSubmissionId] = useState<number | null>(null);
@@ -103,6 +107,11 @@ export default function AdminPanel() {
     }
   };
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    onBack();
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
@@ -118,9 +127,14 @@ export default function AdminPanel() {
               placeholder="Enter password"
               className="bg-white/10 text-white"
             />
-            <Button onClick={handleLogin} className="w-full">
-              Login
-            </Button>
+            <div className="flex gap-2">
+              <Button onClick={handleLogin} className="flex-1">
+                Login
+              </Button>
+              <Button onClick={onBack} variant="outline" className="flex-1">
+                Back to Menu
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -140,9 +154,11 @@ export default function AdminPanel() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold text-white">Submissions</h1>
-          <Button onClick={() => setIsAuthenticated(false)}>
-            Logout
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={handleLogout}>
+              Logout
+            </Button>
+          </div>
         </div>
 
         <div className="bg-black/40 rounded-lg p-6">

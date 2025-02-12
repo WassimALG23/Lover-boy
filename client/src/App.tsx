@@ -13,6 +13,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState("main");
   const [selectedArtist, setSelectedArtist] = useState("");
   const [assetsLoaded, setAssetsLoaded] = useState(false);
+  const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [location] = useLocation();
 
   // Preload all assets when the app starts
@@ -110,16 +111,30 @@ export default function App() {
         }}
       />
 
-      {/* Admin Button */}
-      <Link href="/admin" className="admin-button">
-        Admin Panel
-      </Link>
+      {/* Navigation Buttons */}
+      <div className="fixed top-4 right-4 z-30 flex gap-2">
+        {!isAdminPanelOpen && (
+          <Link href="/admin" onClick={() => setIsAdminPanelOpen(true)} className="admin-button">
+            Admin Panel
+          </Link>
+        )}
+        <Link href="/submit" className="admin-button bg-pink-500/60 hover:bg-pink-500/80">
+          Submit Artist
+        </Link>
+      </div>
 
       {/* Content */}
       <div className="relative z-20">
         <Switch>
-          <Route path="/admin" component={AdminPanel} />
-          <Route path="/submit" component={SubmissionForm} />
+          <Route path="/admin">
+            <AdminPanel onBack={() => {
+              setIsAdminPanelOpen(false);
+              window.location.href = '/';
+            }} />
+          </Route>
+          <Route path="/submit">
+            <SubmissionForm onBack={() => window.location.href = '/'} />
+          </Route>
           <Route>
             <div className="page-transition-enter-active">
               {renderMainContent()}

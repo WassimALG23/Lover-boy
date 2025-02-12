@@ -14,7 +14,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
-export default function SubmissionForm() {
+interface SubmissionFormProps {
+  onBack: () => void;
+}
+
+export default function SubmissionForm({ onBack }: SubmissionFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -149,13 +153,23 @@ export default function SubmissionForm() {
               <FormMessage />
             </FormItem>
 
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Submitting..." : "Submit"}
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                type="submit"
+                className="flex-1"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Submit"}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={onBack}
+                className="flex-1"
+              >
+                Back to Menu
+              </Button>
+            </div>
           </form>
         </Form>
       </div>
