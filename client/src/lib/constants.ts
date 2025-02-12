@@ -2,6 +2,16 @@ import { type Artist } from "../../shared/schema";
 
 export const ARTISTS: Artist[] = [
   {
+    name: "Laufey",
+    route: "laufey",
+    lyric: "confess i loved u from the start",
+    highlighted: "from the start",
+    highlightColor: "text-orange-400",
+    songName: "From The Start",
+    image: "/artists/laufey.jpg",
+    audioUrl: "/audio/Laufey - From The Start.mp3"
+  },
+  {
     name: "Adrianne Lenker",
     route: "adrianne-lenker",
     lyric: "i just want to be anything with u",
