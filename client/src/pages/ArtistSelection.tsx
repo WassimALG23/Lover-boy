@@ -14,7 +14,7 @@ export default function ArtistSelection({ onSelect, onBack }: ArtistSelectionPro
         {/* Back Button */}
         <Button 
           variant="ghost" 
-          className="mb-8 hover:bg-white/10 transition-colors"
+          className="mb-8 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition-all duration-300 text-white/90 hover:text-white"
           onClick={onBack}
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -22,8 +22,10 @@ export default function ArtistSelection({ onSelect, onBack }: ArtistSelectionPro
         </Button>
 
         {/* Title */}
-        <h2 className="text-4xl mb-12 font-bold text-white text-center font-stylized">
-          Select an Artist
+        <h2 className="text-4xl mb-12 font-bold text-white text-center font-stylized relative">
+          <span className="bg-black/40 px-6 py-2 rounded-lg backdrop-blur-sm">
+            Select an Artist
+          </span>
         </h2>
 
         {/* Artist Grid */}
@@ -53,7 +55,7 @@ export default function ArtistSelection({ onSelect, onBack }: ArtistSelectionPro
 
               {/* Hover Background Effect */}
               <div className="absolute inset-0 bg-white/5 opacity-0 
-                           group-hover:opacity-100 transition-opacity duration-300" />
+                            group-hover:opacity-100 transition-opacity duration-300" />
 
               {/* Content */}
               <div className="relative z-10 flex flex-col items-start justify-center gap-1">
