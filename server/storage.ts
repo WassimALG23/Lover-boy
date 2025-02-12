@@ -18,37 +18,72 @@ export interface IStorage {
 export class DatabaseStorage implements IStorage {
   // Artist operations
   async getArtist(id: number): Promise<Artist | undefined> {
-    const [artist] = await db.select().from(artists).where(eq(artists.id, id));
-    return artist;
+    try {
+      const [artist] = await db.select().from(artists).where(eq(artists.id, id));
+      return artist;
+    } catch (error) {
+      console.error('Error in getArtist:', error);
+      throw error;
+    }
   }
 
   async getArtistByRoute(route: string): Promise<Artist | undefined> {
-    const [artist] = await db.select().from(artists).where(eq(artists.route, route));
-    return artist;
+    try {
+      const [artist] = await db.select().from(artists).where(eq(artists.route, route));
+      return artist;
+    } catch (error) {
+      console.error('Error in getArtistByRoute:', error);
+      throw error;
+    }
   }
 
   async getAllArtists(): Promise<Artist[]> {
-    return await db.select().from(artists);
+    try {
+      return await db.select().from(artists);
+    } catch (error) {
+      console.error('Error in getAllArtists:', error);
+      throw error;
+    }
   }
 
   async createArtist(artist: InsertArtist): Promise<Artist> {
-    const [newArtist] = await db.insert(artists).values(artist).returning();
-    return newArtist;
+    try {
+      const [newArtist] = await db.insert(artists).values(artist).returning();
+      return newArtist;
+    } catch (error) {
+      console.error('Error in createArtist:', error);
+      throw error;
+    }
   }
 
   // Song operations
   async getSong(id: number): Promise<Song | undefined> {
-    const [song] = await db.select().from(songs).where(eq(songs.id, id));
-    return song;
+    try {
+      const [song] = await db.select().from(songs).where(eq(songs.id, id));
+      return song;
+    } catch (error) {
+      console.error('Error in getSong:', error);
+      throw error;
+    }
   }
 
   async getSongsByArtist(artistId: number): Promise<Song[]> {
-    return await db.select().from(songs).where(eq(songs.artistId, artistId));
+    try {
+      return await db.select().from(songs).where(eq(songs.artistId, artistId));
+    } catch (error) {
+      console.error('Error in getSongsByArtist:', error);
+      throw error;
+    }
   }
 
   async createSong(song: InsertSong): Promise<Song> {
-    const [newSong] = await db.insert(songs).values(song).returning();
-    return newSong;
+    try {
+      const [newSong] = await db.insert(songs).values(song).returning();
+      return newSong;
+    } catch (error) {
+      console.error('Error in createSong:', error);
+      throw error;
+    }
   }
 }
 
