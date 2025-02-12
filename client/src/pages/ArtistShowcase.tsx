@@ -72,7 +72,12 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
   }
 
   return (
-    <div className="space-background min-h-screen animate-fadeIn">
+    <div className="min-h-screen animate-fadeIn" style={{
+      backgroundImage: "url('/milky-way.webp')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}>
       <div className="content-layer flex flex-col items-center justify-center min-h-screen p-6">
         <Card className="w-full max-w-2xl bg-black/50 backdrop-blur-md">
           <CardContent className="p-6">

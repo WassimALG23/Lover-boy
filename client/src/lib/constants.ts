@@ -5,7 +5,7 @@ export const ARTISTS: Artist[] = [
   {
     name: "Adrianne Lenker",
     route: "adrianne-lenker",
-    lyric: "anything",
+    lyric: "i just want to be anything with u",
     songName: "Anything",
     image: "/artists/adrianne-lenker.jpg",
     audioUrl: "/audio/adrianne lenker - anything (official audio).mp3",
@@ -14,7 +14,7 @@ export const ARTISTS: Artist[] = [
   {
     name: "Arctic Monkeys",
     route: "arctic-monkeys",
-    lyric: "I wanna be yours",
+    lyric: "i just wanna be urs",
     songName: "I Wanna Be Yours",
     image: "/artists/arctic-monkeys.jpg",
     audioUrl: "/audio/Arctic Monkeys - I Wanna Be Yours.mp3",
@@ -23,7 +23,7 @@ export const ARTISTS: Artist[] = [
   {
     name: "Mac DeMarco",
     route: "mac-demarco",
-    lyric: "My kind of woman",
+    lyric: "just to let u know Ur my kind of women",
     songName: "My Kind Of Woman",
     image: "/artists/mac-demarco.jpg",
     audioUrl: "/audio/Mac DeMarco  My Kind Of Woman.mp3",
@@ -32,7 +32,7 @@ export const ARTISTS: Artist[] = [
   {
     name: "Mitski",
     route: "mitski",
-    lyric: "I want you",
+    lyric: "i just want you",
     songName: "I Want You",
     image: "/artists/mitski.jpg",
     audioUrl: "/audio/Mitski - I Want You (Official Video).mp3",
@@ -41,7 +41,7 @@ export const ARTISTS: Artist[] = [
   {
     name: "TV Girl",
     route: "tv-girl",
-    lyric: "Not allowed",
+    lyric: "i know we're not allowed to date but i just want u",
     songName: "Not Allowed",
     image: "/artists/tv-girl.jpg",
     audioUrl: "/audio/Not Allowed.mp3",
@@ -50,7 +50,7 @@ export const ARTISTS: Artist[] = [
   {
     name: "Tyler, The Creator",
     route: "tyler-the-creator",
-    lyric: "Like him",
+    lyric: "i will treat u better im not like him",
     songName: "Like Him",
     image: "/artists/tyler.jpg",
     audioUrl: "/audio/Tyler, The Creator - Like Him (feat. LolaYoung) Lyrics @TylerTheCreator.mp3",
