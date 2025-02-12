@@ -1,52 +1,38 @@
-import { pgTable, text, serial, timestamp, integer } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+// Artist Schema
+export const artistSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  route: z.string(),
+  image: z.string(),
+  createdAt: z.date()
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
-});
-
-export type InsertUser = z.infer<typeof insertUserSchema>;
-export type User = typeof users.$inferSelect;
-
-export const artists = pgTable("artists", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  route: text("route").notNull().unique(),
-  image: text("image").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
-});
-
-export const songs = pgTable("songs", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  lyric: text("lyric").notNull(),
-  audioUrl: text("audio_url").notNull(),
-  artistId: integer("artist_id").references(() => artists.id),
-  createdAt: timestamp("created_at").defaultNow(),
+// Song Schema
+export const songSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  lyric: z.string(),
+  audioUrl: z.string(),
+  artistId: z.number(),
+  createdAt: z.date()
 });
 
 // Schema for inserting artists
-export const insertArtistSchema = createInsertSchema(artists).omit({
+export const insertArtistSchema = artistSchema.omit({ 
   id: true,
-  createdAt: true,
+  createdAt: true 
 });
 
 // Schema for inserting songs
-export const insertSongSchema = createInsertSchema(songs).omit({
+export const insertSongSchema = songSchema.omit({ 
   id: true,
-  createdAt: true,
+  createdAt: true 
 });
 
 // Types for TypeScript
-export type Artist = typeof artists.$inferSelect;
+export type Artist = z.infer<typeof artistSchema>;
 export type InsertArtist = z.infer<typeof insertArtistSchema>;
-export type Song = typeof songs.$inferSelect;
+export type Song = z.infer<typeof songSchema>;
 export type InsertSong = z.infer<typeof insertSongSchema>;

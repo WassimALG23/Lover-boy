@@ -1,6 +1,4 @@
-import { artists, songs, type Artist, type InsertArtist, type Song, type InsertSong } from "@shared/schema";
-import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { type Artist, type InsertArtist, type Song, type InsertSong } from "@shared/schema";
 
 export interface IStorage {
   // Artist operations
@@ -15,76 +13,53 @@ export interface IStorage {
   createSong(song: InsertSong): Promise<Song>;
 }
 
-export class DatabaseStorage implements IStorage {
+export class MemoryStorage implements IStorage {
+  private artists: Artist[] = [];
+  private songs: Song[] = [];
+  private artistIdCounter = 1;
+  private songIdCounter = 1;
+
   // Artist operations
   async getArtist(id: number): Promise<Artist | undefined> {
-    try {
-      const [artist] = await db.select().from(artists).where(eq(artists.id, id));
-      return artist;
-    } catch (error) {
-      console.error('Error in getArtist:', error);
-      throw error;
-    }
+    return this.artists.find(artist => artist.id === id);
   }
 
   async getArtistByRoute(route: string): Promise<Artist | undefined> {
-    try {
-      const [artist] = await db.select().from(artists).where(eq(artists.route, route));
-      return artist;
-    } catch (error) {
-      console.error('Error in getArtistByRoute:', error);
-      throw error;
-    }
+    return this.artists.find(artist => artist.route === route);
   }
 
   async getAllArtists(): Promise<Artist[]> {
-    try {
-      return await db.select().from(artists);
-    } catch (error) {
-      console.error('Error in getAllArtists:', error);
-      throw error;
-    }
+    return [...this.artists];
   }
 
   async createArtist(artist: InsertArtist): Promise<Artist> {
-    try {
-      const [newArtist] = await db.insert(artists).values(artist).returning();
-      return newArtist;
-    } catch (error) {
-      console.error('Error in createArtist:', error);
-      throw error;
-    }
+    const newArtist: Artist = {
+      id: this.artistIdCounter++,
+      ...artist,
+      createdAt: new Date()
+    };
+    this.artists.push(newArtist);
+    return newArtist;
   }
 
   // Song operations
   async getSong(id: number): Promise<Song | undefined> {
-    try {
-      const [song] = await db.select().from(songs).where(eq(songs.id, id));
-      return song;
-    } catch (error) {
-      console.error('Error in getSong:', error);
-      throw error;
-    }
+    return this.songs.find(song => song.id === id);
   }
 
   async getSongsByArtist(artistId: number): Promise<Song[]> {
-    try {
-      return await db.select().from(songs).where(eq(songs.artistId, artistId));
-    } catch (error) {
-      console.error('Error in getSongsByArtist:', error);
-      throw error;
-    }
+    return this.songs.filter(song => song.artistId === artistId);
   }
 
   async createSong(song: InsertSong): Promise<Song> {
-    try {
-      const [newSong] = await db.insert(songs).values(song).returning();
-      return newSong;
-    } catch (error) {
-      console.error('Error in createSong:', error);
-      throw error;
-    }
+    const newSong: Song = {
+      id: this.songIdCounter++,
+      ...song,
+      createdAt: new Date()
+    };
+    this.songs.push(newSong);
+    return newSong;
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new MemoryStorage();
