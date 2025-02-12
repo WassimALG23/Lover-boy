@@ -21,12 +21,15 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
       const audio = new Audio(artist.audioUrl);
       audio.loop = true;
       audio.preload = "auto";
-      audioRef.current = audio;
       
-      audio.onerror = (e) => {
+      audio.addEventListener('canplaythrough', () => {
+        audioRef.current = audio;
+      });
+      
+      audio.addEventListener('error', (e) => {
         console.error("Error loading audio:", e);
         setIsPlaying(false);
-      };
+      });
       
       setIsPlaying(false);
     }
