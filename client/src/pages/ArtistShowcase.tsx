@@ -18,8 +18,16 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
   useEffect(() => {
     // Create new audio element when artist changes
     if (artist) {
-      audioRef.current = new Audio(artist.audioUrl);
-      audioRef.current.loop = true;
+      const audio = new Audio(artist.audioUrl);
+      audio.loop = true;
+      audio.preload = "auto";
+      audioRef.current = audio;
+      
+      // Add error handling
+      audio.onerror = (e) => {
+        console.error("Error loading audio:", e);
+      };
+      
       setIsPlaying(false);
     }
 
@@ -39,15 +47,21 @@ export default function ArtistShowcase({ artistRoute, onBack }: ArtistShowcasePr
     onBack();
   };
 
-  const togglePlay = () => {
+  const togglePlay = async () => {
     if (!audioRef.current) return;
 
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch(console.error);
+    try {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        await audioRef.current.play();
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.error("Error playing audio:", error);
+      setIsPlaying(false);
     }
-    setIsPlaying(!isPlaying);
   };
 
   if (!artist) {
