@@ -29,6 +29,12 @@
   overflow: hidden;
 }
 
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
 @keyframes dots {
   0%, 20% { content: '.'; }
   40%, 60% { content: '..'; }

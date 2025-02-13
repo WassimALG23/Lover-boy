@@ -60,10 +60,19 @@ export default function StylizedText({
         segment.toLowerCase() === highlighted.toLowerCase() ? (
           <span 
             key={index} 
-            className={`font-bold ${highlightColor} animate-pulse bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500`}
+            className={`font-bold hover:scale-105 transition-transform`}
             style={{ 
+              color: 
+                segment.toLowerCase() === 'tv girl' ? '#FF69B4' :
+                segment.toLowerCase() === 'not allowed' ? '#FF1493' :
+                segment.toLowerCase() === 'sweet' ? '#FFD700' :
+                segment.toLowerCase() === 'k.' ? '#8B0000' :
+                segment.toLowerCase() === 'from the start' ? '#FFA500' :
+                segment.toLowerCase() === 'anything' ? '#006400' :
+                segment.toLowerCase() === 'arctic monkeys' ? '#F0F8FF' :
+                segment.toLowerCase() === 'like him' ? '#696969' : highlightColor,
               textShadow: '0 0 8px currentColor',
-              animation: 'hue-rotate 3s linear infinite'
+              animation: 'bounce 1s ease-in-out infinite'
             }}
           >
             {segment}
