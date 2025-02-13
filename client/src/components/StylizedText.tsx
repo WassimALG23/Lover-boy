@@ -60,8 +60,11 @@ export default function StylizedText({
         segment.toLowerCase() === highlighted.toLowerCase() ? (
           <span 
             key={index} 
-            className={`font-bold ${highlightColor} animate-pulse`}
-            style={{ textShadow: '0 0 8px currentColor' }}
+            className={`font-bold ${highlightColor} animate-pulse bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500`}
+            style={{ 
+              textShadow: '0 0 8px currentColor',
+              animation: 'hue-rotate 3s linear infinite'
+            }}
           >
             {segment}
           </span>
