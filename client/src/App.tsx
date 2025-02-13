@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import MainMenu from "./pages/MainMenu";
 import ArtistSelection from "./pages/ArtistSelection";
 import ArtistShowcase from "./pages/ArtistShowcase";
-import { Toaster } from "@/components/ui/toaster";
 import { ARTISTS } from "./lib/constants";
 import "./lib/fonts.css";
 
@@ -112,7 +111,6 @@ export default function App() {
       <div className="relative z-20">
         {renderPage()}
       </div>
-      <Toaster />
     </div>
   );
 }
