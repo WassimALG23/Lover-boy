@@ -106,13 +106,14 @@ export default function StylizedText({
             className={`font-bold hover:scale-105 transition-transform`}
             style={{ 
               color: 
-                segment.toLowerCase() === 'k.' ? '#FF0000' :
-                segment.toLowerCase() === 'beabadoobee' ? '#FFA500' :
+                segment.toLowerCase() === 'want u to leave' ? '#FF0000' :
+                segment.toLowerCase() === 'perfect pair' ? '#25cfdb' :
                 segment.toLowerCase() === 'like him' ? '#0A0A0A' :
                 segment.toLowerCase() === 'sweet' ? '#FFD700' :
                 segment.toLowerCase() === 'from the start' ? '#FFA500' :
                 segment.toLowerCase() === 'anything' ? '#006400' :
-                segment.toLowerCase() === 'arctic monkeys' ? '#FFFAFA' :
+                segment.toLowerCase() === 'my kind of women' ? '#66064c':
+                segment.toLowerCase() === 'wanna be urs' ? '#065e66' :
                 segment.toLowerCase() === 'want you' ? '#4B0082' : highlightColor,
               textShadow: '0 0 8px currentColor',
               animation: 'bounce 1s ease-in-out infinite, glow 2s ease-in-out infinite'
