@@ -66,13 +66,14 @@ export default function StylizedText({
                 segment.toLowerCase() === 'tv girl' ? '#FF69B4' :
                 segment.toLowerCase() === 'not allowed' ? '#FF1493' :
                 segment.toLowerCase() === 'sweet' ? '#FFD700' :
-                segment.toLowerCase() === 'k.' ? '#8B0000' :
+                segment.toLowerCase() === 'k.' ? '#FF0000' :
                 segment.toLowerCase() === 'from the start' ? '#FFA500' :
                 segment.toLowerCase() === 'anything' ? '#006400' :
                 segment.toLowerCase() === 'arctic monkeys' ? '#F0F8FF' :
-                segment.toLowerCase() === 'like him' ? '#696969' : highlightColor,
+                segment.toLowerCase() === 'like him' ? '#1a1a1a' :
+                segment.toLowerCase() === 'the perfect pair' ? '#FFA07A' : highlightColor,
               textShadow: '0 0 8px currentColor',
-              animation: 'bounce 1s ease-in-out infinite'
+              animation: 'bounce 1s ease-in-out infinite, glow 2s ease-in-out infinite'
             }}
           >
             {segment}
