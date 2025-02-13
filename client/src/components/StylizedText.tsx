@@ -107,7 +107,7 @@ export default function StylizedText({
             style={{ 
               color: 
                 segment.toLowerCase() === 'k.' ? '#FF0000' :
-                segment.toLowerCase() === 'beabadoobee' ? '#FFB366' :
+                segment.toLowerCase() === 'beabadoobee' ? '#FFA500' :
                 segment.toLowerCase() === 'like him' ? '#0A0A0A' :
                 segment.toLowerCase() === 'sweet' ? '#FFD700' :
                 segment.toLowerCase() === 'from the start' ? '#FFA500' :
