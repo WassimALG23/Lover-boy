@@ -69,8 +69,9 @@ export default function StylizedText({
                 segment.toLowerCase() === 'k.' ? '#FF0000' :
                 segment.toLowerCase() === 'from the start' ? '#FFA500' :
                 segment.toLowerCase() === 'anything' ? '#006400' :
-                segment.toLowerCase() === 'arctic monkeys' ? '#F0F8FF' :
-                segment.toLowerCase() === 'like him' ? '#1a1a1a' :
+                segment.toLowerCase() === 'arctic monkeys' ? '#FFFAFA' :
+                segment.toLowerCase() === 'like him' ? '#0A0A0A' :
+                segment.toLowerCase() === 'beabadoobee' ? '#FFB366' :
                 segment.toLowerCase() === 'the perfect pair' ? '#FFA07A' : highlightColor,
               textShadow: '0 0 8px currentColor',
               animation: 'bounce 1s ease-in-out infinite, glow 2s ease-in-out infinite'
